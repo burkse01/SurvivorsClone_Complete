@@ -59,7 +59,7 @@ shape = SubResource("RectangleShape2D_yfi4i")
 
 [node name="IceSpearTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
-wait_time = 1.5
+wait_time = 0.1
 
 [node name="IceSpearAttackTimer" type="Timer" parent="Attack/IceSpearTimer"]
 unique_name_in_owner = true

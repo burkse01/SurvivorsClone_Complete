@@ -7,6 +7,9 @@ var maxhp = 80
 var last_movement = Vector2.UP
 var time = 0
 
+var destination = position;
+var stopped = true;
+
 var experience = 0
 var experience_level = 1
 var collected_experience = 0
@@ -33,6 +36,7 @@ var spell_size = 0
 var additional_attacks = 0
 
 #IceSpear
+var spell_1_on_cd
 var icespear_ammo = 0
 var icespear_baseammo = 0
 var icespear_attackspeed = 1.5
@@ -83,13 +87,29 @@ func _ready():
 	set_expbar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	movement()
-
+func fire_spell_1():
+	var icespear_attack = iceSpear.instantiate()
+	icespear_attack.position = position
+	icespear_attack.target = get_global_mouse_position()
+	icespear_attack.level = icespear_level
+	add_child(icespear_attack)
+	spell_1_on_cd = true
+	iceSpearTimer.start()
 func movement():
-	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
-	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
-	var mov = Vector2(x_mov,y_mov)
+	if(Input.is_action_just_pressed("spell_1" )&& !spell_1_on_cd):
+		fire_spell_1()
+	if(Input.is_action_just_pressed("right_click")):
+		stopped = false
+		destination = get_global_mouse_position()
+	if(Input.is_action_just_pressed("stop")):
+		stopped = true
+	var mov = Vector2.ZERO
+	if(!stopped):
+		mov = destination - position
+		if(mov.length() < 1):
+			stopped = true
 	if mov.x > 0:
 		sprite.flip_h = true
 	elif mov.x < 0:
@@ -127,22 +147,8 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 		death()
 
 func _on_ice_spear_timer_timeout():
-	icespear_ammo += icespear_baseammo + additional_attacks
-	iceSpearAttackTimer.start()
+	spell_1_on_cd = false
 
-
-func _on_ice_spear_attack_timer_timeout():
-	if icespear_ammo > 0:
-		var icespear_attack = iceSpear.instantiate()
-		icespear_attack.position = position
-		icespear_attack.target = get_random_target()
-		icespear_attack.level = icespear_level
-		add_child(icespear_attack)
-		icespear_ammo -= 1
-		if icespear_ammo > 0:
-			iceSpearAttackTimer.start()
-		else:
-			iceSpearAttackTimer.stop()
 
 func _on_tornado_timer_timeout():
 	tornado_ammo += tornado_baseammo + additional_attacks
@@ -220,7 +226,7 @@ func calculate_experiencecap():
 	if experience_level < 20:
 		exp_cap = experience_level*5
 	elif experience_level < 40:
-		exp_cap + 95 * (experience_level-19)*8
+		exp_cap = 95 * (experience_level-19)*8
 	else:
 		exp_cap = 255 + (experience_level-39)*12
 		
