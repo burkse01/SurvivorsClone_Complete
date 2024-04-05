@@ -1,4 +1,5 @@
-res://Player/player.gd
-res://Player/player.tscn
 res://World/world.tscn
+res://Player/player.tscn
+res://Player/Attack/javelin.gd
 res://Enemy/enemy_cyclops.tscn
+res://Player/Attack/ice_spear.gd
