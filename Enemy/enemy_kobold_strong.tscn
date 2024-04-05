@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bbvhxvk65o8el"]
 
 [ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_dnf7l"]
-[ext_resource type="Texture2D" uid="uid://b3hvvindvaacd" path="res://Textures/Enemy/kolbold_strong.png" id="2_xd60h"]
+[ext_resource type="Texture2D" uid="uid://borb37hye1orc" path="res://Textures/Enemy/Logger.png" id="2_plrv3"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="3_avoap"]
 [ext_resource type="PackedScene" uid="uid://uhr6mtuisqm1" path="res://Utility/hit_box.tscn" id="4_e7l5k"]
 [ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="5_tph6t"]
@@ -64,7 +64,8 @@ hp = 20
 enemy_damage = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_xd60h")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_plrv3")
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
