@@ -1,5 +1,8 @@
-res://Textures/Items
+res://Textures/Player
 res://Textures/Enemy
+res://Textures
+res://Textures/character_demo
+res://Textures/Items
 res://Audio/Music
 res://TitleScreen
 res://Utility

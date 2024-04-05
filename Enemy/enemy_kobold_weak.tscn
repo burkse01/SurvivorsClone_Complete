@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://gvm5jcbbgwdv"]
 
 [ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_1bh7b"]
-[ext_resource type="Texture2D" uid="uid://bb2tqmla8xdg8" path="res://Textures/Enemy/kolbold_weak.png" id="2_ojadc"]
+[ext_resource type="Texture2D" uid="uid://cphwlpd1d7tgf" path="res://Textures/Enemy/MERCENARY3.png" id="2_ku0bg"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="3_gamcv"]
 [ext_resource type="PackedScene" uid="uid://uhr6mtuisqm1" path="res://Utility/hit_box.tscn" id="4_vdnsx"]
 [ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="5_03jve"]
@@ -34,7 +34,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_ojadc")]
+"values": [ExtResource("2_ku0bg")]
 }
 
 [sub_resource type="Animation" id="Animation_w8hns"]
@@ -73,8 +73,9 @@ motion_mode = 1
 script = ExtResource("1_1bh7b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_ojadc")
+position = Vector2(2, 3.8147e-06)
+scale = Vector2(0.0562944, 0.0562944)
+texture = ExtResource("2_ku0bg")
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -17,7 +17,7 @@ script = ExtResource("1_oi0p3")
 layout_mode = 0
 offset_right = 673.0
 offset_bottom = 382.0
-color = Color(0.572549, 0.207843, 0.168627, 1)
+color = Color(0.631373, 0.741176, 0.67451, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -25,7 +25,7 @@ offset_right = 640.0
 offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("1_xdjxl")
 theme_override_font_sizes/font_size = 72
-text = "Survivors Clone #13247"
+text = "Terran and The Wrath of the Wildwoods"
 horizontal_alignment = 1
 vertical_alignment = 1
 
