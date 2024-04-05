@@ -3,22 +3,22 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jjt1rh5e2jcp"
-path="res://.godot/imported/ice_spear.png-948aaf14c7173736fae300f7ae1f22a5.ctex"
+path="res://.godot/imported/ice_spear2.png-e5ccc1f905be7e548bb699e2904782f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Items/Weapons/ice_spear.png"
-dest_files=["res://.godot/imported/ice_spear.png-948aaf14c7173736fae300f7ae1f22a5.ctex"]
+source_file="res://Textures/Items/Weapons/ice_spear2.png"
+dest_files=["res://.godot/imported/ice_spear2.png-e5ccc1f905be7e548bb699e2904782f7.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

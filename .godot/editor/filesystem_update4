@@ -1,5 +1,9 @@
-res://World/world.tscn
 res://Player/player.tscn
-res://Player/Attack/javelin.gd
+res://Enemy/enemy.gd
+res://World/world.tscn
 res://Enemy/enemy_cyclops.tscn
+res://Utility/hurt_box.tscn
+res://Enemy/enemy_kobold_weak.tscn
+res://Enemy/enemy_super.tscn
+res://Player/Attack/ice_spear.tscn
 res://Player/Attack/ice_spear.gd
