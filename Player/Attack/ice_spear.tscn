@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://wpliv06gy0pq"]
 
 [ext_resource type="Script" path="res://Player/Attack/ice_spear.gd" id="1_4el3j"]
-[ext_resource type="Texture2D" uid="uid://r3axv8cpaoeo" path="res://Textures/Items/ice_spear.png" id="2_tcdwg"]
+[ext_resource type="Texture2D" uid="uid://r3axv8cpaoeo" path="res://Textures/Items/Weapons/ice_spear.png" id="2_tcdwg"]
 [ext_resource type="AudioStream" uid="uid://cl3g2vts3nyt0" path="res://Audio/SoundEffect/ice.wav" id="3_esswn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4tiy"]

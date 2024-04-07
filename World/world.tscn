@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://du6qbgqucaqov"]
 
-[ext_resource type="Texture2D" uid="uid://b2qtpq28vdoml" path="res://Textures/dbbc1adc84da2b144430f92b6651bc23.jpg.png" id="1_tqt0n"]
+[ext_resource type="Texture2D" uid="uid://b2qtpq28vdoml" path="res://Textures/ENVIRONMENT/dbbc1adc84da2b144430f92b6651bc23.jpg.png" id="1_va3th"]
 [ext_resource type="PackedScene" uid="uid://dncgepmkc4jf4" path="res://Player/player.tscn" id="2_40uwv"]
 [ext_resource type="PackedScene" uid="uid://ba2claihwes2y" path="res://Utility/enemy_spawner.tscn" id="3_p01g4"]
 [ext_resource type="PackedScene" uid="uid://gvm5jcbbgwdv" path="res://Enemy/enemy_kobold_weak.tscn" id="4_ee8bm"]
@@ -91,7 +91,7 @@ texture_filter = 2
 texture_repeat = 2
 position = Vector2(852, -14)
 scale = Vector2(0.78325, 0.78325)
-texture = ExtResource("1_tqt0n")
+texture = ExtResource("1_va3th")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 

@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 
-var movement_speed = 40.0
-var hp = 80
-var maxhp = 80
+var movement_speed = 60.0
+var hp = 200
+var maxhp = 200
 var last_movement = Vector2.UP
 var time = 0
 

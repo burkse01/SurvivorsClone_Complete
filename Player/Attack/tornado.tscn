@@ -1,11 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://bis78tmxnqw4c"]
+[gd_scene load_steps=8 format=3 uid="uid://bis78tmxnqw4c"]
 
 [ext_resource type="Script" path="res://Player/Attack/tornado.gd" id="1_x0aq0"]
 [ext_resource type="Texture2D" uid="uid://dgiqnjaqcsmjc" path="res://Textures/Items/Weapons/ryan-rosanky-fastflame.png" id="2_10wtv"]
 [ext_resource type="AudioStream" uid="uid://r7omweq2u12i" path="res://Audio/SoundEffect/tornado.ogg" id="3_ihvf8"]
+[ext_resource type="Texture2D" uid="uid://cuw608mc8hr4a" path="res://Textures/Items/Weapons/FIREBALL copy.png" id="4_m4ord"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd51k"]
-size = Vector2(17, 26)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_drbvl"]
+radius = 8.775
+height = 40.0
+
+[sub_resource type="Animation" id="Animation_1t7a8"]
+resource_name = "FIREBALL"
+length = 6.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireballCopy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4, 4.6, 4.8, 5, 5.2, 5.4, 5.6, 5.8, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_suvl8"]
+_data = {
+"FIREBALL": SubResource("Animation_1t7a8")
+}
 
 [node name="Tornado" type="Area2D" groups=["attack"]]
 top_level = true
@@ -15,12 +39,14 @@ collision_mask = 0
 script = ExtResource("1_x0aq0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_10wtv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 1)
-shape = SubResource("RectangleShape2D_dd51k")
+position = Vector2(10, -2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_drbvl")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 20.0
@@ -29,5 +55,19 @@ autostart = true
 [node name="snd_attack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ihvf8")
 autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_suvl8")
+}
+speed_scale = 3.0
+
+[node name="FireballCopy" type="Sprite2D" parent="."]
+position = Vector2(10, -10)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_m4ord")
+hframes = 4
+vframes = 6
+frame = 11
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
