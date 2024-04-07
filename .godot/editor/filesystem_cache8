@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1712455687
+::res://::1712468808
 icon.svg::CompressedTexture2D::1730451811002220422::1712281693::1712283510::1::::<><>::
 ::res://Audio/::1712379643
 mp3.mp3::AudioStreamMP3::3074351514588539242::1712285389::1712285577::1::::<><>::
@@ -19,8 +19,8 @@ Lose.ogg::AudioStreamOggVorbis::4837761622028604864::1712281693::1712281693::1::
 tornado.ogg::AudioStreamOggVorbis::1260143059858838358::1712281693::1712281693::1::::<><>::
 Victory.wav::AudioStreamWAV::3344226589942656187::1712281693::1712281693::1::::<><>::
 woosh.wav::AudioStreamWAV::5510730769330180881::1712281693::1712281693::1::::<><>::
-::res://Enemy/::1712455011
-enemy.gd::GDScript::-1::1712455011::0::1::::<>CharacterBody2D<>::
+::res://Enemy/::1712465431
+enemy.gd::GDScript::-1::1712465431::0::1::::<>CharacterBody2D<>::
 enemy_cyclops.tscn::PackedScene::3391669273859432399::1712312774::0::1::::<><>::res://Enemy/enemy.gd<>uid://b4tu8mxdnvsy1::::res://Textures/Enemy/cyclops.png<>uid://xy3cvpwdy828::::res://Utility/hurt_box.tscn<>uid://uhr6mtuisqm1::::res://Utility/hit_box.tscn<>uid://bi7t7cjthnhhc::::res://Audio/SoundEffect/enemy_hit.ogg
 enemy_juggernaut.tscn::PackedScene::496021227581763643::1712281693::0::1::::<><>::res://Enemy/enemy.gd<>uid://blpjl8raquq2s::::res://Textures/Enemy/juggernaut.png<>uid://xy3cvpwdy828::::res://Utility/hurt_box.tscn<>uid://uhr6mtuisqm1::::res://Utility/hit_box.tscn<>uid://bi7t7cjthnhhc::::res://Audio/SoundEffect/enemy_hit.ogg
 enemy_kobold_strong.tscn::PackedScene::2500428672263140551::1712351134::0::1::::<><>::res://Enemy/enemy.gd<>uid://borb37hye1orc::::res://Textures/Enemy/Logger.png<>uid://xy3cvpwdy828::::res://Utility/hurt_box.tscn<>uid://uhr6mtuisqm1::::res://Utility/hit_box.tscn<>uid://bi7t7cjthnhhc::::res://Audio/SoundEffect/enemy_hit.ogg
@@ -33,22 +33,23 @@ tenderness.otf::FontFile::4903199324624063636::1712281693::1712281693::1::::<><>
 ::res://Objects/::1712351134
 experience_gem.gd::GDScript::-1::1712281693::0::1::::<>Area2D<>::
 experience_gem.tscn::PackedScene::9107052804146137674::1712351134::0::1::::<><>::res://Objects/experience_gem.gd<>uid://0uiyfwnmkwa2::::res://Textures/Export12.png<>uid://bnm8cttqwefdx::::res://Audio/SoundEffect/collectgem.mp3
-::res://Player/::1712455201
-player.gd::GDScript::-1::1712455171::0::1::::<>CharacterBody2D<>::
-player.tscn::PackedScene::8076218025860144563::1712455201::0::1::::<><>::res://Player/player.gd<>uid://dqdc8fgpvj2k2::::res://Textures/Player/Terran.png<>uid://xy3cvpwdy828::::res://Utility/hurt_box.tscn<>uid://dx7xx6vfahxlq::::res://Textures/GUI/exp_background.png<>uid://dlx33roiu0vlj::::res://Textures/GUI/exp_progress.png<>uid://cb4e8g30xxp5u::::res://Font/tenderness.otf<>uid://ul8hunj8tl2t::::res://Audio/SoundEffect/levelup.ogg<>uid://cj6a5rhwov14::::res://Textures/GUI/healthbar.png<>uid://da53mspvqfxq4::::res://Textures/GUI/health.png<>uid://bnv76nm5171dn::::res://Audio/SoundEffect/Victory.wav<>uid://ca6physj6mqei::::res://Audio/SoundEffect/Lose.ogg<>uid://b7c7gsdx2rkjm::::res://Utility/basic_button.tscn
-::res://Player/Attack/::1712455172
-Explosion.tscn::PackedScene::4945711093400463153::1712455172::0::1::::<><>::
+::res://Player/::1712468761
+player.gd::GDScript::-1::1712455764::0::1::::<>CharacterBody2D<>::
+player.tscn::PackedScene::8076218025860144563::1712468756::0::1::::<><>::res://Player/player.gd<>uid://dqdc8fgpvj2k2::::res://Textures/Player/Terran.png<>uid://xy3cvpwdy828::::res://Utility/hurt_box.tscn<>uid://dx7xx6vfahxlq::::res://Textures/GUI/exp_background.png<>uid://dlx33roiu0vlj::::res://Textures/GUI/exp_progress.png<>uid://cb4e8g30xxp5u::::res://Font/tenderness.otf<>uid://ul8hunj8tl2t::::res://Audio/SoundEffect/levelup.ogg<>uid://cj6a5rhwov14::::res://Textures/GUI/healthbar.png<>uid://da53mspvqfxq4::::res://Textures/GUI/health.png<>uid://bnv76nm5171dn::::res://Audio/SoundEffect/Victory.wav<>uid://ca6physj6mqei::::res://Audio/SoundEffect/Lose.ogg<>uid://b7c7gsdx2rkjm::::res://Utility/basic_button.tscn
+::res://Player/Attack/::1712468761
+Explosion.gd::GDScript::-1::1712456376::0::1::::<>Node2D<>::
+Explosion.tscn::PackedScene::4945711093400463153::1712468757::0::1::::<><>::res://Player/Attack/Explosion.gd
 Explosion.txt::TextFile::-1::1712437017::0::1::::<><>::
-ice_spear.gd::GDScript::-1::1712455011::0::1::::<>Area2D<>::
+ice_spear.gd::GDScript::-1::1712465431::0::1::::<>Area2D<>::
 ice_spear.tscn::PackedScene::1575803542647231666::1712448680::0::1::::<><>::res://Player/Attack/ice_spear.gd<>uid://r3axv8cpaoeo::::res://Textures/Items/Weapons/ice_spear.png<>uid://cl3g2vts3nyt0::::res://Audio/SoundEffect/ice.wav
-javelin.gd::GDScript::-1::1712455012::0::1::::<>Area2D<>::
-javelin.tscn::PackedScene::6027268688724696921::1712351134::0::1::::<><>::uid://d22bl2j2hb3d1::::res://Textures/Items/Weapons/javelin_3_new.png<>res://Player/Attack/javelin.gd<>uid://ckro6v281rcab::::res://Audio/SoundEffect/woosh.wav
-tornado.gd::GDScript::-1::1712455012::0::1::::<>Area2D<>::
-tornado.tscn::PackedScene::2987093124882172644::1712455172::0::1::::<><>::res://Player/Attack/tornado.gd<>uid://dgiqnjaqcsmjc::::res://Textures/Items/Weapons/ryan-rosanky-fastflame.png<>uid://r7omweq2u12i::::res://Audio/SoundEffect/tornado.ogg<>uid://cuw608mc8hr4a::::res://Textures/Items/Weapons/FIREBALL copy.png
+javelin.gd::GDScript::-1::1712467840::0::1::::<>Area2D<>::
+javelin.tscn::PackedScene::6027268688724696921::1712468757::0::1::::<><>::res://Player/Attack/javelin.gd<>uid://ckro6v281rcab::::res://Audio/SoundEffect/woosh.wav<>uid://dt3toi02l5qs5::::res://Textures/Enemy/neutral_prongbok copy.png
+tornado.gd::GDScript::-1::1712468757::0::1::::<>Area2D<>::
+tornado.tscn::PackedScene::2987093124882172644::1712468758::0::1::::<><>::res://Player/Attack/tornado.gd<>uid://r7omweq2u12i::::res://Audio/SoundEffect/tornado.ogg<>uid://cuw608mc8hr4a::::res://Textures/Items/Weapons/FIREBALL copy.png
 ::res://Player/GUI/::1712281794
 item_container.gd::GDScript::-1::1712281693::0::1::::<>TextureRect<>::
 item_container.tscn::PackedScene::1261977606372398052::1712281693::0::1::::<><>::uid://chs611yf5p3hy::::res://Textures/GUI/EmptyItem.png<>res://Player/GUI/item_container.gd
-::res://Textures/::1712449661
+::res://Textures/::1712457979
 ::res://Textures/character_demo/::1712307221
 character_demo.png::CompressedTexture2D::2996936324630709553::1709818018::1712284256::1::::<><>::
 info_and_license.txt::TextFile::-1::1710312530::0::1::::<><>::
@@ -103,7 +104,7 @@ Export12.png::CompressedTexture2D::1796537538237417251::1712282858::1712448624::
 Export13.png::CompressedTexture2D::363867329578625091::1712282858::1712448624::1::::<><>::
 Export14.png::CompressedTexture2D::3153101255629256089::1712282858::1712448624::1::::<><>::
 SpriteSheet1.png::CompressedTexture2D::6817592254804198549::1712281693::1712448624::1::::<><>::
-::res://Textures/Items/::1712449661
+::res://Textures/Items/::1712457979
 fx_f5_tremor copy 2.png::CompressedTexture2D::4762806323279132427::1712436681::1712448932::1::::<><>::
 ::res://Textures/Items/Gems/::1712281801
 Gem_blue.png::CompressedTexture2D::3556139476586360769::1712281693::1712281693::1::::<><>::
@@ -117,7 +118,7 @@ low_boots.png::CompressedTexture2D::1322977870524673861::1712281693::1712281693:
 scroll_old.png::CompressedTexture2D::8894597912220432708::1712281693::1712281693::1::::<><>::
 thick_new.png::CompressedTexture2D::3567023041226500108::1712281693::1712281693::1::::<><>::
 urand_mage.png::CompressedTexture2D::6169360069570463610::1712281693::1712281693::1::::<><>::
-::res://Textures/Items/Weapons/::1712449661
+::res://Textures/Items/Weapons/::1712457979
 FIREBALL copy.png::CompressedTexture2D::6223963174303021094::1712448389::1712448406::1::::<><>::
 FIREBALL.png::CompressedTexture2D::5619837205307955765::1712449653::1712449656::1::::<><>::
 fx_f4_curseofagony copy.png::CompressedTexture2D::6486324483139674229::1712437494::1712437495::1::::<><>::
@@ -125,6 +126,7 @@ ice_spear2.png::CompressedTexture2D::651479951112982671::1712281693::1712285884:
 ice_spear.png::CompressedTexture2D::1251055146299867838::1712285807::1712448680::1::::<><>::
 javelin_3_new.png::CompressedTexture2D::9110180822661388040::1712281693::1712281693::1::::<><>::
 javelin_3_new_attack.png::CompressedTexture2D::6026409255003932078::1712281693::1712281693::1::::<><>::
+neutral_prongbok copy.png::CompressedTexture2D::332965788360245117::1712457959::1712457972::1::::<><>::
 ryan-rosanky-fastflame.png::CompressedTexture2D::7597905295585515156::1712312035::1712312053::1::::<><>::
 sword.png::CompressedTexture2D::3847054396889028481::1712281693::1712281693::1::::<><>::
 TerranSword.png::CompressedTexture2D::4103852959087240197::1712301847::1712301853::1::::<><>::
@@ -177,5 +179,5 @@ item_option.tscn::PackedScene::4470608249998982266::1712281693::0::1::::<><>::ui
 spawn_info.gd::GDScript::-1::1712281693::0::1::::Spawn_info<>Resource<>::
 upgrade_db.gd::GDScript::-1::1712281693::0::1::::<>Node<>::
 upgrade_db.tscn::PackedScene::8898193193893975824::1712281693::0::1::::<><>::res://Utility/upgrade_db.gd
-::res://World/::1712455172
-world.tscn::PackedScene::8628008232662343889::1712455172::0::1::::<><>::uid://b2qtpq28vdoml::::res://Textures/ENVIRONMENT/dbbc1adc84da2b144430f92b6651bc23.jpg.png<>uid://dncgepmkc4jf4::::res://Player/player.tscn<>uid://ba2claihwes2y::::res://Utility/enemy_spawner.tscn<>uid://gvm5jcbbgwdv::::res://Enemy/enemy_kobold_weak.tscn<>res://Utility/spawn_info.gd<>uid://bbvhxvk65o8el::::res://Enemy/enemy_kobold_strong.tscn<>uid://bok7kd2psi5gl::::res://Enemy/enemy_cyclops.tscn<>uid://hcjnrdsb563h::::res://Enemy/enemy_juggernaut.tscn<>uid://btf7clk4jja87::::res://Enemy/enemy_super.tscn<>uid://bj2iedbml0qwg::::res://Audio/mp3.mp3<>res://Audio/Music/snd_Music.gd
+::res://World/::1712468757
+world.tscn::PackedScene::8628008232662343889::1712468757::0::1::::<><>::uid://b2qtpq28vdoml::::res://Textures/ENVIRONMENT/dbbc1adc84da2b144430f92b6651bc23.jpg.png<>uid://dncgepmkc4jf4::::res://Player/player.tscn<>uid://ba2claihwes2y::::res://Utility/enemy_spawner.tscn<>uid://gvm5jcbbgwdv::::res://Enemy/enemy_kobold_weak.tscn<>res://Utility/spawn_info.gd<>uid://bbvhxvk65o8el::::res://Enemy/enemy_kobold_strong.tscn<>uid://bok7kd2psi5gl::::res://Enemy/enemy_cyclops.tscn<>uid://hcjnrdsb563h::::res://Enemy/enemy_juggernaut.tscn<>uid://btf7clk4jja87::::res://Enemy/enemy_super.tscn<>uid://bj2iedbml0qwg::::res://Audio/mp3.mp3<>res://Audio/Music/snd_Music.gd

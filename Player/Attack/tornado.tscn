@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bis78tmxnqw4c"]
+[gd_scene load_steps=7 format=3 uid="uid://bis78tmxnqw4c"]
 
 [ext_resource type="Script" path="res://Player/Attack/tornado.gd" id="1_x0aq0"]
-[ext_resource type="Texture2D" uid="uid://dgiqnjaqcsmjc" path="res://Textures/Items/Weapons/ryan-rosanky-fastflame.png" id="2_10wtv"]
 [ext_resource type="AudioStream" uid="uid://r7omweq2u12i" path="res://Audio/SoundEffect/tornado.ogg" id="3_ihvf8"]
 [ext_resource type="Texture2D" uid="uid://cuw608mc8hr4a" path="res://Textures/Items/Weapons/FIREBALL copy.png" id="4_m4ord"]
 
@@ -38,11 +37,6 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_x0aq0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_10wtv")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, -2)
 rotation = 1.5708
@@ -68,6 +62,5 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_m4ord")
 hframes = 4
 vframes = 6
-frame = 11
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

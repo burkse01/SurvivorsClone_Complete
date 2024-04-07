@@ -15,10 +15,12 @@ var angle_more = Vector2.ZERO
 signal remove_from_array(object)
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var sprite = $Sprite  # Assuming you have a Sprite node as a child
+@onready var sprite = $FireballCopy # Assuming you have a Sprite node as a child
 @onready var animation_player = $AnimationPlayer  # Assuming you have an AnimationPlayer node as a child
 
 func _ready():
+
+
 	match level:
 		1:
 			hp = 9999
@@ -95,6 +97,8 @@ func _ready():
 
 func _physics_process(delta):
 	position += angle*speed*delta
+	sprite.flip_h = angle.x > 0
+
 
 func _on_timer_timeout():
 	emit_signal("remove_from_array",self)

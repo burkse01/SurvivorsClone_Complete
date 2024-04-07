@@ -2,9 +2,9 @@ extends Area2D
 
 var level = 1
 var hp = 9999
-var speed = 600.0
+var speed = 400.0
 var damage = 10
-var knockback_amount = 300
+var knockback_amount = 600
 var paths = 1
 var attack_size = 1.0
 var attack_speed = 10.0
@@ -15,12 +15,13 @@ var target_array = []
 var angle = Vector2.ZERO
 var reset_pos = Vector2.ZERO
 
-var spr_jav_reg = preload("res://Textures/Items/Weapons/javelin_3_new.png")
-var spr_jav_atk = preload("res://Textures/Items/Weapons/javelin_3_new_attack.png")
+var enemies_in_contact = []
+
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var sprite = $Sprite2D
+@onready var prongbok_sprite = $NeutralProngbokCopy # Update to your actual node path
 @onready var collision = $CollisionShape2D
+@onready var animation_player = $AnimationPlayer # Update to your actual node path
 @onready var attackTimer = get_node("%AttackTimer")
 @onready var changeDirectionTimer = get_node("%ChangeDirection")
 @onready var resetPosTimer = get_node ("%ResetPosTimer")
@@ -31,6 +32,7 @@ signal remove_from_array(object)
 func _ready():
 	update_javelin()
 	_on_reset_pos_timer_timeout()
+	animation_player.play("TOAD")  # Replace with the name of your looping animation
 
 func update_javelin():
 	level = player.javelin_level
@@ -74,15 +76,21 @@ func update_javelin():
 
 func _physics_process(delta):
 	if target_array.size() > 0:
-		position += angle*speed*delta
+		var direction = global_position.direction_to(target)
+		position += direction * speed * delta
+	# Keep the sprite upright; don't rotate
 	else:
-		var player_angle = global_position.direction_to(reset_pos)
+	# Movement back to reset position or stand still if no target
+		var player_direction = global_position.direction_to(player.global_position)
 		var distance_dif = global_position - player.global_position
 		var return_speed = 20
 		if abs(distance_dif.x) > 500 or abs(distance_dif.y) > 500:
-			return_speed = 100
-		position += player_angle*return_speed*delta
-		rotation = global_position.direction_to(player.global_position).angle() + deg_to_rad(135)
+			return_speed = 400
+		position += player_direction * return_speed * delta
+		# Ensure prongbok sprite stays upright
+	# Reset rotation if it's been changed elsewhere
+	prongbok_sprite.rotation = 0
+	prongbok_sprite.flip_h = global_position.x > player.global_position.x
 
 func add_paths():
 	snd_attack.play()
@@ -98,20 +106,19 @@ func add_paths():
 	process_path()
 
 func process_path():
+	# Set the movement direction towards the target
 	angle = global_position.direction_to(target)
+	# Since we're keeping the sprite upright, we might not need to adjust rotation here.
+	# However, if you're using the angle for directional logic elsewhere, keep this.
 	changeDirectionTimer.start()
-	var tween = create_tween()
-	var new_rotation_degrees = angle.angle() + deg_to_rad(135)
-	tween.tween_property(self,"rotation",new_rotation_degrees,0.25).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.play()
 
 func enable_attack(atk = true):
 	if atk:
 		collision.call_deferred("set","disabled",false)
-		sprite.texture = spr_jav_atk
+		animation_player.play("TOAD")
 	else:
 		collision.call_deferred("set","disabled",true)
-		sprite.texture = spr_jav_reg
+		animation_player.play("TOAD")
 
 func _on_attack_timer_timeout():
 	add_paths()

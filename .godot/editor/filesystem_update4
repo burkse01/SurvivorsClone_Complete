@@ -1,9 +1,11 @@
-res://Player/player.tscn
+res://Player/Attack/tornado.tscn
 res://Enemy/enemy.gd
 res://Player/Attack/ice_spear.gd
 res://Player/Attack/javelin.gd
 res://Player/Attack/tornado.gd
-res://Player/player.gd
+res://Player/player.tscn
 res://World/world.tscn
-res://Player/Attack/tornado.tscn
 res://Player/Attack/Explosion.tscn
+res://Player/Attack/javelin.tscn
+res://Enemy/enemy_kobold_weak.tscn
+res://Objects/experience_gem.tscn

@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccp0ey3nufgtl"]
+[gd_scene load_steps=3 format=3 uid="uid://ccp0ey3nufgtl"]
+
+[ext_resource type="Script" path="res://Player/Attack/Explosion.gd" id="1_ssc8o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jt56f"]
 
 [node name="Explosion" type="Node2D"]
+script = ExtResource("1_ssc8o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

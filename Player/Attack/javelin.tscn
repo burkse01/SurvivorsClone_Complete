@@ -1,11 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr4wh8k8gaysv"]
+[gd_scene load_steps=7 format=3 uid="uid://cr4wh8k8gaysv"]
 
-[ext_resource type="Texture2D" uid="uid://d22bl2j2hb3d1" path="res://Textures/Items/Weapons/javelin_3_new.png" id="1_rbe4t"]
 [ext_resource type="Script" path="res://Player/Attack/javelin.gd" id="1_ro7n8"]
 [ext_resource type="AudioStream" uid="uid://ckro6v281rcab" path="res://Audio/SoundEffect/woosh.wav" id="3_6kycs"]
+[ext_resource type="Texture2D" uid="uid://dt3toi02l5qs5" path="res://Textures/Enemy/neutral_prongbok copy.png" id="4_dmva3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ojwf"]
-size = Vector2(4.24264, 32.5269)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wnv3t"]
+radius = 17.9025
+
+[sub_resource type="Animation" id="Animation_v0w65"]
+resource_name = "TOAD"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NeutralProngbokCopy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [50, 40, 30, 20, 10, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyvj3"]
+_data = {
+"TOAD": SubResource("Animation_v0w65")
+}
 
 [node name="Javelin" type="Area2D" groups=["attack"]]
 top_level = true
@@ -13,18 +35,15 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_ro7n8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_rbe4t")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
 rotation = -0.785398
-shape = SubResource("RectangleShape2D_5ojwf")
+shape = SubResource("CircleShape2D_wnv3t")
 disabled = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 5.0
+wait_time = 2.0
 one_shot = true
 autostart = true
 
@@ -33,11 +52,25 @@ unique_name_in_owner = true
 
 [node name="ResetPosTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 3.0
+wait_time = 2.0
 autostart = true
 
 [node name="snd_attack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_6kycs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gyvj3")
+}
+speed_scale = 2.131
+
+[node name="NeutralProngbokCopy" type="Sprite2D" parent="."]
+position = Vector2(-1, -5)
+scale = Vector2(0.519608, 0.519608)
+texture = ExtResource("4_dmva3")
+hframes = 10
+vframes = 10
+frame = 50
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ChangeDirection" to="." method="_on_change_direction_timeout"]
