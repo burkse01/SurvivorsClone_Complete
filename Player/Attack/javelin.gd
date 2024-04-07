@@ -19,9 +19,9 @@ var enemies_in_contact = []
 
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var prongbok_sprite = $NeutralProngbokCopy # Update to your actual node path
+@onready var prongbok_sprite = $Explosion # Update to your actual node path
 @onready var collision = $CollisionShape2D
-@onready var animation_player = $AnimationPlayer # Update to your actual node path
+@onready var animation_player = $AnimationPlayer2 # Update to your actual node path
 @onready var attackTimer = get_node("%AttackTimer")
 @onready var changeDirectionTimer = get_node("%ChangeDirection")
 @onready var resetPosTimer = get_node ("%ResetPosTimer")
@@ -32,7 +32,7 @@ signal remove_from_array(object)
 func _ready():
 	update_javelin()
 	_on_reset_pos_timer_timeout()
-	animation_player.play("TOAD")  # Replace with the name of your looping animation
+	animation_player.play("EXPLOSION")  # Replace with the name of your looping animation
 
 func update_javelin():
 	level = player.javelin_level
@@ -115,10 +115,10 @@ func process_path():
 func enable_attack(atk = true):
 	if atk:
 		collision.call_deferred("set","disabled",false)
-		animation_player.play("TOAD")
+		animation_player.play("EXPLOSION")
 	else:
 		collision.call_deferred("set","disabled",true)
-		animation_player.play("TOAD")
+		animation_player.play("EXPLOSION")
 
 func _on_attack_timer_timeout():
 	add_paths()

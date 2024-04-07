@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dncgepmkc4jf4"]
+[gd_scene load_steps=19 format=3 uid="uid://dncgepmkc4jf4"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_37q80"]
 [ext_resource type="Texture2D" uid="uid://dqdc8fgpvj2k2" path="res://Textures/Player/Terran.png" id="2_lqoex"]
@@ -27,6 +27,8 @@ radius = 370.951
 radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6vwp8"]
+
+[sub_resource type="Theme" id="Theme_lw788"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
@@ -111,9 +113,11 @@ offset_bottom = 360.0
 
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
+clip_contents = true
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 40.0
+scale = Vector2(0.3, 0.3)
 texture_under = ExtResource("4_pbpj5")
 texture_progress = ExtResource("5_5ive2")
 
@@ -137,6 +141,7 @@ offset_left = 304.0
 offset_top = 200.0
 offset_right = 336.0
 offset_bottom = 208.0
+theme = SubResource("Theme_lw788")
 value = 50.0
 texture_over = ExtResource("8_flesq")
 texture_progress = ExtResource("9_uker1")

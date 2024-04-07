@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://du6qbgqucaqov"]
+[gd_scene load_steps=24 format=3 uid="uid://du6qbgqucaqov"]
 
 [ext_resource type="Texture2D" uid="uid://b2qtpq28vdoml" path="res://Textures/ENVIRONMENT/dbbc1adc84da2b144430f92b6651bc23.jpg.png" id="1_va3th"]
 [ext_resource type="PackedScene" uid="uid://dncgepmkc4jf4" path="res://Player/player.tscn" id="2_40uwv"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://btf7clk4jja87" path="res://Enemy/enemy_super.tscn" id="9_xs42h"]
 [ext_resource type="AudioStream" uid="uid://bj2iedbml0qwg" path="res://Audio/mp3.mp3" id="10_ugaix"]
 [ext_resource type="Script" path="res://Audio/Music/snd_Music.gd" id="11_ovtx6"]
+[ext_resource type="Script" path="res://World/Trees.gd" id="12_20fcl"]
+[ext_resource type="Texture2D" uid="uid://dspu6sacm3kqc" path="res://Textures/Trees/Tree2.png" id="13_sgndp"]
 
 [sub_resource type="Resource" id="Resource_03m25"]
 script = ExtResource("5_jj7s8")
@@ -84,12 +86,16 @@ enemy = ExtResource("9_xs42h")
 enemy_num = 1
 enemy_spawn_delay = 0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7wiuf"]
+radius = 91.27
+height = 371.08
+
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_filter = 2
 texture_repeat = 2
-position = Vector2(852, -14)
+position = Vector2(2.00006, 2)
 scale = Vector2(0.78325, 0.78325)
 texture = ExtResource("1_va3th")
 region_enabled = true
@@ -108,5 +114,19 @@ stream = ExtResource("10_ugaix")
 volume_db = -15.0
 autoplay = true
 script = ExtResource("11_ovtx6")
+
+[node name="Trees" type="StaticBody2D" parent="."]
+script = ExtResource("12_20fcl")
+
+[node name="Area2D" type="Area2D" parent="Trees"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees"]
+position = Vector2(-143, -4)
+rotation = -0.390954
+shape = SubResource("CapsuleShape2D_7wiuf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees"]
+position = Vector2(-120, -31)
+texture = ExtResource("13_sgndp")
 
 [connection signal="playerdeath" from="Player" to="snd_Music" method="_on_player_playerdeath"]
