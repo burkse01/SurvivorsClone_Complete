@@ -1,11 +1,11 @@
-AnimationPlayer
 Sprite2D
-CollisionShape2D
 Area2D
+AudioStreamPlayer
+AnimationPlayer
+CollisionShape2D
 StaticBody2D
 ColorRect
 AnimatedSprite2D
-AudioStreamPlayer
 Timer
 TileMap
 Label

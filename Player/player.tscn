@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://dncgepmkc4jf4"]
+[gd_scene load_steps=21 format=3 uid="uid://dncgepmkc4jf4"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_37q80"]
-[ext_resource type="Texture2D" uid="uid://dqdc8fgpvj2k2" path="res://Textures/Player/Terran.png" id="2_lqoex"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="3_gs51i"]
 [ext_resource type="Texture2D" uid="uid://dx7xx6vfahxlq" path="res://Textures/GUI/exp_background.png" id="4_pbpj5"]
 [ext_resource type="Texture2D" uid="uid://dlx33roiu0vlj" path="res://Textures/GUI/exp_progress.png" id="5_5ive2"]
@@ -12,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bnv76nm5171dn" path="res://Audio/SoundEffect/Victory.wav" id="10_rwm3p"]
 [ext_resource type="AudioStream" uid="uid://ca6physj6mqei" path="res://Audio/SoundEffect/Lose.ogg" id="11_28kfi"]
 [ext_resource type="PackedScene" uid="uid://b7c7gsdx2rkjm" path="res://Utility/basic_button.tscn" id="12_i8esf"]
+[ext_resource type="Texture2D" uid="uid://bbj0oaipc6kph" path="res://Textures/Player/TERRANATTACK copy.png" id="13_eq7hl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nffdp"]
 radius = 4.0
@@ -30,15 +30,31 @@ radius = 50.0
 
 [sub_resource type="Theme" id="Theme_lw788"]
 
+[sub_resource type="Animation" id="Animation_vy5tr"]
+resource_name = "RUN"
+length = 1.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TerranattackCopy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_65e3r"]
+_data = {
+"RUN": SubResource("Animation_vy5tr")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_37q80")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-3, -3)
-scale = Vector2(0.129478, 0.129478)
-texture = ExtResource("2_lqoex")
-hframes = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -246,6 +262,19 @@ offset_top = 40.0
 offset_right = 208.0
 offset_bottom = 56.0
 columns = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_65e3r")
+}
+speed_scale = 2.0
+
+[node name="TerranattackCopy" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, -2)
+scale = Vector2(0.0868779, 0.0868779)
+texture = ExtResource("13_eq7hl")
+hframes = 3
+vframes = 3
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]

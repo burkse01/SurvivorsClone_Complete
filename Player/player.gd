@@ -57,8 +57,8 @@ var javelin_level = 0
 var enemy_close = []
 
 
-@onready var sprite = $Sprite2D
-@onready var walkTimer = get_node("%walkTimer")
+@onready var sprite = $TerranattackCopy
+@onready var walk = $AnimationPlayer
 
 #GUI
 @onready var expBar = get_node("%ExperienceBar")
@@ -98,33 +98,33 @@ func fire_spell_1():
 	spell_1_on_cd = true
 	iceSpearTimer.start()
 func movement():
-	if(Input.is_action_just_pressed("spell_1" )&& !spell_1_on_cd):
+	if(Input.is_action_just_pressed("spell_1") && !spell_1_on_cd):
 		fire_spell_1()
 	if(Input.is_action_just_pressed("right_click")):
 		stopped = false
 		destination = get_global_mouse_position()
 	if(Input.is_action_just_pressed("stop")):
 		stopped = true
+
 	var mov = Vector2.ZERO
-	if(!stopped):
+	if not stopped:
 		mov = destination - position
-		if(mov.length() < 1):
+		if mov.length() < 1:
 			stopped = true
-	if mov.x > 0:
-		sprite.flip_h = true
-	elif mov.x < 0:
-		sprite.flip_h = false
 
 	if mov != Vector2.ZERO:
+		# If the character is moving, play the "RUN" animation
+		walk.play("RUN")  # Play the "RUN" animation
+		if mov.x > 0:
+			sprite.flip_h = false  # Assuming the character faces right by default
+		elif mov.x < 0:
+			sprite.flip_h = true
 		last_movement = mov
-		if walkTimer.is_stopped():
-			if sprite.frame >= sprite.hframes - 1:
-				sprite.frame = 0
-			else:
-				sprite.frame += 1
-			walkTimer.start()
-	
-	velocity = mov.normalized()*movement_speed
+	else:
+		# If the character has stopped moving, you might want to switch to an idle animation
+		walk.stop()  # Or walk.play("IDLE") if you have an idle animation
+		
+	velocity = mov.normalized() * movement_speed
 	move_and_slide()
 
 func attack():
