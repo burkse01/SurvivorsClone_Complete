@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q2d33q5u6mwb"
-path="res://.godot/imported/fx_f4_shadownova copy.png-bd500a3539d559df51fd340dfdceadb0.ctex"
+uid="uid://8dl4q0ql8bvk"
+path="res://.godot/imported/BrandW copy.png-c6ab4fc327f3e10367f2140c2dbcb67f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Enemy/fx_f4_shadownova copy.png"
-dest_files=["res://.godot/imported/fx_f4_shadownova copy.png-bd500a3539d559df51fd340dfdceadb0.ctex"]
+source_file="res://Textures/Items/Skills/BrandW copy.png"
+dest_files=["res://.godot/imported/BrandW copy.png-c6ab4fc327f3e10367f2140c2dbcb67f.ctex"]
 
 [params]
 
