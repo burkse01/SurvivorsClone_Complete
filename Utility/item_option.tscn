@@ -5,12 +5,15 @@
 [ext_resource type="FontFile" uid="uid://cb4e8g30xxp5u" path="res://Font/tenderness.otf" id="2_wif5r"]
 
 [node name="ItemOption" type="ColorRect"]
+clip_contents = true
 custom_minimum_size = Vector2(180, 50)
 anchors_preset = -1
 anchor_right = 0.281
 anchor_bottom = 0.139
 offset_right = 0.159988
 offset_bottom = -0.0400047
+size_flags_horizontal = 4
+size_flags_vertical = 4
 color = Color(0.54902, 0.54902, 0.54902, 1)
 script = ExtResource("1_unejd")
 
@@ -23,11 +26,13 @@ offset_bottom = 26.0
 color = Color(0, 0, 0, 1)
 
 [node name="ItemIcon" type="TextureRect" parent="ColorRect"]
+clip_contents = true
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_583l0")
+expand_mode = 5
 
 [node name="lbl_name" type="Label" parent="."]
 layout_mode = 0

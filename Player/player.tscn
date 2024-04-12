@@ -97,7 +97,6 @@ wait_time = 0.2
 unique_name_in_owner = true
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 4
 monitorable = false
@@ -122,14 +121,13 @@ shape = SubResource("CircleShape2D_6vwp8")
 [node name="GUILayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" type="Control" parent="GUILayer"]
+top_level = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 640.0
-offset_bottom = 360.0
 
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
-clip_contents = true
+top_level = true
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 40.0
@@ -165,7 +163,6 @@ texture_progress = ExtResource("9_uker1")
 [node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 process_mode = 2
-visible = false
 layout_mode = 0
 offset_left = 800.0
 offset_top = 50.0
@@ -247,15 +244,15 @@ vertical_alignment = 1
 
 [node name="CollectedWeapons" type="GridContainer" parent="GUILayer/GUI"]
 unique_name_in_owner = true
+clip_contents = true
 layout_mode = 0
-offset_left = 8.0
-offset_top = 24.0
-offset_right = 208.0
-offset_bottom = 40.0
+offset_right = 200.0
+offset_bottom = 16.0
 columns = 10
 
 [node name="CollectedUpgrades" type="GridContainer" parent="GUILayer/GUI"]
 unique_name_in_owner = true
+clip_contents = true
 layout_mode = 0
 offset_left = 8.0
 offset_top = 40.0
