@@ -48,6 +48,7 @@ autostart = true
 
 [node name="snd_attack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ihvf8")
+volume_db = -20.0
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

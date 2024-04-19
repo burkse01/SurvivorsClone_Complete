@@ -18,6 +18,9 @@ var collected_experience = 0
 var iceSpear = preload("res://Player/Attack/ice_spear.tscn")
 var tornado = preload("res://Player/Attack/tornado.tscn")
 var javelin = preload("res://Player/Attack/javelin.tscn")
+var slash = preload("res://Player/Attack/SLASH.tscn")
+var explosion = preload ("res://Player/Attack/Explosion.tscn")
+var dash = preload ("res://Player/Attack/DASH.tscn")
 
 #AttackNodes
 @onready var iceSpearTimer = get_node("%IceSpearTimer")
@@ -25,6 +28,7 @@ var javelin = preload("res://Player/Attack/javelin.tscn")
 @onready var tornadoTimer = get_node("%TornadoTimer")
 @onready var tornadoAttackTimer = get_node("%TornadoAttackTimer")
 @onready var javelinBase = get_node("%JavelinBase")
+
 
 #UPGRADES
 var collected_upgrades = []
@@ -89,6 +93,47 @@ func _ready():
 
 func _physics_process(_delta):
 	movement()
+	check_skill_activation()
+	
+	
+func check_skill_activation():
+	if Input.is_action_just_pressed("skill_q"):
+		activate_slash()
+	if Input.is_action_just_pressed("skill_w"):
+		activate_explosion()
+	if Input.is_action_just_pressed("skill_e"):
+		activate_dash()
+	if Input.is_action_just_pressed("skill_r"):
+		fire_spell_1()  # Call the correct function that handles the ice spear attack
+
+func activate_slash():
+	if !spell_1_on_cd:
+		var slash_instance = slash.instance()
+		add_child(slash_instance)
+		slash_instance.position = position  # Adjust based on need
+		slash_instance.sl
+	
+		# Try to get AnimationPlayer from a known relative path
+	var animation_player = get_node_or_null("res://Player/Attack/SLASH.tscn/AnimationPlayer")
+	if animation_player != null:
+		animation_player.play("SLASH")
+	else:
+		print("AnimationPlayer not found")
+
+func activate_explosion():
+	var explosion_instance = explosion.instance()
+	add_child(explosion_instance)
+	explosion_instance.position = position
+	explosion_instance.create_forcefield_area()
+
+
+func activate_dash():
+	var dash_instance = dash.instance()
+	add_child(dash_instance)
+	dash_instance.position = position
+	dash_instance.start_dash()
+
+
 func fire_spell_1():
 	var icespear_attack = iceSpear.instantiate()
 	icespear_attack.position = position
@@ -97,6 +142,8 @@ func fire_spell_1():
 	add_child(icespear_attack)
 	spell_1_on_cd = true
 	iceSpearTimer.start()
+	
+	
 func movement():
 	if(Input.is_action_just_pressed("spell_1") && !spell_1_on_cd):
 		fire_spell_1()
@@ -291,9 +338,9 @@ func upgrade_character(upgrade):
 		"speed1","speed2","speed3","speed4":
 			movement_speed += 20.0
 		"tome1","tome2","tome3","tome4":
-			spell_size += 0.10
+			spell_size += 0.2
 		"scroll1","scroll2","scroll3","scroll4":
-			spell_cooldown += 0.05
+			spell_cooldown += 0.1
 		"ring1","ring2":
 			additional_attacks += 1
 		"food":
