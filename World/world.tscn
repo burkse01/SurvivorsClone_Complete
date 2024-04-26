@@ -128,5 +128,3 @@ shape = SubResource("CapsuleShape2D_7wiuf")
 [node name="Sprite2D" type="Sprite2D" parent="Trees"]
 position = Vector2(-120, -31)
 texture = ExtResource("13_sgndp")
-
-[connection signal="playerdeath" from="Player" to="snd_Music" method="_on_player_playerdeath"]

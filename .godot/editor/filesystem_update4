@@ -1,4 +1,4 @@
-res://World/world.tscn
+res://Player/player.tscn
 res://Enemy/enemy.gd
 res://Player/Attack/DASH.gd
 res://Player/Attack/ice_spear.gd
@@ -6,15 +6,12 @@ res://Player/Attack/javelin.gd
 res://Player/Attack/tornado.gd
 res://Utility/item_option.gd
 res://Utility/spawn_info.gd
+res://World/world.tscn
 res://Player/Attack/SLASH.tscn
-res://Player/Attack/SLASH.gd
-res://Player/player.tscn
-res://Player/player.gd
-res://Player/Attack/ice_spear.tscn
-res://Player/Attack/tornado.tscn
-res://Enemy/enemy_super.tscn
-res://Enemy/enemy_kobold_weak.tscn
 res://Player/Attack/DASH.tscn
 res://Player/Attack/Explosion.tscn
-res://Player/Attack/Explosion.gd
+res://Player/Attack/ice_spear.tscn
 res://Player/Attack/RUN.tscn
+res://Player/player.gd
+res://Player/Attack/Explosion.gd
+res://Player/Attack/SLASH.gd

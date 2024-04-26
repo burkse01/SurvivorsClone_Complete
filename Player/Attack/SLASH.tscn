@@ -51,6 +51,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1q7c0"]
+radius = 22.0
 height = 218.0
 
 [node name="Slash" type="Node2D"]
@@ -92,5 +93,8 @@ vframes = 2
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-71, 19)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1q7c0")
+
+[node name="Timer" type="Timer" parent="."]
