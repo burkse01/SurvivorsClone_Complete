@@ -1,6 +1,6 @@
 CollisionShape2D
-Area2D
 Timer
+Area2D
 AudioStreamPlayer
 AnimationPlayer
 Node2D

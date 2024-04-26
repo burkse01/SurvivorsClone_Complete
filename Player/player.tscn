@@ -96,6 +96,18 @@ wait_time = 0.2
 [node name="JavelinBase" type="Node2D" parent="Attack"]
 unique_name_in_owner = true
 
+[node name="SlashTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="SlashAttackTimer" type="Timer" parent="Attack/SlashTimer"]
+unique_name_in_owner = true
+
+[node name="ExplosionTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="DashTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 4
@@ -278,6 +290,10 @@ vframes = 3
 [connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/TornadoTimer" to="." method="_on_tornado_timer_timeout"]
 [connection signal="timeout" from="Attack/TornadoTimer/TornadoAttackTimer" to="." method="_on_tornado_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/SlashTimer" to="." method="_on_slash_timer_timeout"]
+[connection signal="timeout" from="Attack/SlashTimer/SlashAttackTimer" to="." method="_on_slash_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/ExplosionTimer" to="." method="_on_explosion_timer_timeout"]
+[connection signal="timeout" from="Attack/DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]

@@ -97,4 +97,7 @@ position = Vector2(-71, 19)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1q7c0")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." groups=["attack"]]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

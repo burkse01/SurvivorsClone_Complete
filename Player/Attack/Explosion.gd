@@ -31,15 +31,15 @@ func setup_explosion_properties():
 		2:
 			damage = 45
 			forcefield_radius_end = 850.0
-			forcefield_expand_duration = 1.8
+			forcefield_expand_duration = 2.0
 		3:
 			damage = 60
 			forcefield_radius_end = 900.0
-			forcefield_expand_duration = 1.6
+			forcefield_expand_duration = 2.0
 		4:
 			damage = 75
 			forcefield_radius_end = 950.0
-			forcefield_expand_duration = 1.4
+			forcefield_expand_duration = 2.0
 
 func create_forcefield_area():
 	"""
@@ -80,10 +80,14 @@ func _on_ForcefieldArea_body_entered(body):
 	if body.is_in_group("enemies"):
 		body.take_damage(damage)  # Apply the predefined damage to the enemy.
 
-func _on_Tween_tween_completed(object, key):
+func _on_Tween_tween_completed(_object, _key):
 	"""
 	Called when the tween animation completes. This method handles the cleanup of the
 	forcefield area by freeing the associated Area2D node from memory.
 	"""
 	# Cleanup the forcefield area by freeing it, which removes it from the scene.
 	self.forcefield_area.queue_free()
+
+
+func _on_timer_timeout() -> void:
+	pass # Replace with function body.

@@ -85,3 +85,7 @@ func slash():
 			body.take_damage(slash_damage)  # Apply damage to the enemy.
 	
 	collision_area.queue_free()  # Remove and clean up the collision area from the scene after checking.
+
+
+func _on_timer_timeout() -> void:
+	pass # Replace with function body.

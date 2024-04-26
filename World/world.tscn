@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://du6qbgqucaqov"]
+[gd_scene load_steps=25 format=3 uid="uid://du6qbgqucaqov"]
 
 [ext_resource type="Texture2D" uid="uid://b2qtpq28vdoml" path="res://Textures/ENVIRONMENT/dbbc1adc84da2b144430f92b6651bc23.jpg.png" id="1_va3th"]
 [ext_resource type="PackedScene" uid="uid://dncgepmkc4jf4" path="res://Player/player.tscn" id="2_40uwv"]
@@ -86,6 +86,8 @@ enemy = ExtResource("9_xs42h")
 enemy_num = 1
 enemy_spawn_delay = 0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lqgka"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7wiuf"]
 radius = 91.27
 height = 371.08
@@ -119,6 +121,11 @@ script = ExtResource("11_ovtx6")
 script = ExtResource("12_20fcl")
 
 [node name="Area2D" type="Area2D" parent="Trees"]
+position = Vector2(-149, -30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Area2D"]
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_lqgka")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trees"]
 position = Vector2(-143, -4)

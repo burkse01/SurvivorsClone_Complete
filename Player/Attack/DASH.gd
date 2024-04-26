@@ -38,19 +38,19 @@ func setup_dash_properties():
 			dash_duration = 1.5
 		2:
 			dash_speed = 700
-			dash_distance = 550
+			dash_distance = 500
 			damage = 30
 			knockback_amount = 450
 			dash_duration = 1.5
 		3:
 			dash_speed = 700
-			dash_distance = 550
+			dash_distance = 500
 			damage = 40
 			knockback_amount = 500
 			dash_duration = 1.5
 		4:
 			dash_speed = 700
-			dash_distance = 550
+			dash_distance = 500
 			damage = 50
 			knockback_amount = 550
 			dash_duration = 1.5
@@ -75,7 +75,7 @@ func start_dash():
 	trail_instance.global_position = global_position
 	add_child(trail_instance)
 
-func _on_tween_completed(object, key):
+func _on_tween_completed(_object, _key):
 	"""
 	Called when the Tween animation completes. This method is responsible for checking collision with enemies,
 	applying damage and knockback, and then cleaning up the dash node.
@@ -83,3 +83,7 @@ func _on_tween_completed(object, key):
 	# Logic to check for collisions with enemies and apply damage and knockback could be implemented here.
 	emit_signal("remove_from_array", self)  # Notify interested parties that the dash is complete.
 	queue_free()  # Remove this node from the scene.
+
+
+func _on_timer_timeout() -> void:
+	pass # Replace with function body.

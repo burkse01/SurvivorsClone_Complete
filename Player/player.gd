@@ -37,12 +37,13 @@ var dash = preload("res://Player/Attack/DASH.tscn")  # Preloads the Dash attack 
 
 # Assuming similar timer nodes exist for Slash, Explosion, and Dash in your scene:
 @onready var slashTimer = get_node("%SlashTimer")  # Timer node for managing Slash cooldown.
+# Optional: Attack timers for managing delays between these attacks (if applicable)
+@onready var slashAttackTimer = get_node("%SlashAttackTimer")  # Manage delays between Slash attacks.
 @onready var explosionTimer = get_node("%ExplosionTimer")  # Timer node for managing Explosion cooldown.
 @onready var dashTimer = get_node("%DashTimer")  # Timer node for managing Dash cooldown.
 
-# Optional: Attack timers for managing delays between these attacks (if applicable)
-@onready var slashAttackTimer = get_node("%SlashAttackTimer")  # Manage delays between Slash attacks.
-@onready var explosionAttackTimer = get_node("%ExplosionAttackTimer")  # Manage delays between Explosion attacks.
+
+
 
 # Upgrade and ability enhancement variables
 var collected_upgrades = []  # List of collected upgrades.
@@ -113,7 +114,6 @@ func _ready():
 	It's called automatically when the node is added to the active scene.
 	"""
 	upgrade_character("icespear1")  # Initialize the character with an Ice Spear upgrade.
-	upgrade_character("icespear1")  # Initialize the character with an Ice Spear upgrade.
 	upgrade_character("slash1")     # Initialize the character with a basic Slash upgrade.
 	upgrade_character("dash1")      # Initialize the character with a basic Dash upgrade.
 	upgrade_character("explosion1") # Initialize the character with a basic Explosion upgrade.
@@ -140,7 +140,7 @@ func check_skill_activation():
 		activate_explosion()  # Activate the explosion skill.
 	if Input.is_action_just_pressed("skill_dash"):
 		activate_dash()  # Activate the dash skill.
-	if Input.is_action_just_pressed("skill_arrow"):
+	if Input.is_action_just_pressed("spell_1"):
 		fire_spell_1()  # Activate the ice spear (arrow) skill.
 
 func activate_slash():
@@ -200,8 +200,22 @@ func movement():
 	Handles the character's movement based on player input. This function checks for movement inputs,
 	updates the character's position, and controls the animation based on the movement state.
 	"""
+	# Handle Ice Spear activation
 	if Input.is_action_just_pressed("spell_1") and !spell_1_on_cd:
 		fire_spell_1()  # Trigger Ice Spear if its specific input is pressed and it is not on cooldown.
+
+	# Handle Slash activation
+	if Input.is_action_just_pressed("skill_slash") and !slash_on_cd:
+		activate_slash()  # Trigger Slash if its specific input is pressed and it is not on cooldown.
+
+	# Handle Explosion activation
+	if Input.is_action_just_pressed("skill_explosion") and !explosion_on_cd:
+		activate_explosion()  # Trigger Explosion if its specific input is pressed and it is not on cooldown.
+
+	# Handle Dash activation
+	if Input.is_action_just_pressed("skill_dash") and !dash_on_cd:
+		activate_dash()  # Trigger Dash if its specific input is pressed and it is not on cooldown.
+
 	if Input.is_action_just_pressed("right_click"):
 		stopped = false  # Set movement to active on right click.
 		destination = get_global_mouse_position()  # Update the destination to the mouse position.
@@ -455,6 +469,42 @@ func levelup():
 	
 func upgrade_character(upgrade):
 	match upgrade:
+		"dash1":
+			dash_level = 1
+			# Add specific changes for dash1 here
+		"dash2":
+			dash_level = 2
+			# Add specific changes for dash2 here
+		"dash3":
+			dash_level = 3
+			# Add specific changes for dash3 here
+		"dash4":
+			dash_level = 4
+			# Add specific changes for dash4 here
+		"slash1":
+			slash_level = 1
+			# Add specific changes for slash1 here
+		"slash2":
+			slash_level = 2
+			# Add specific changes for slash2 here
+		"slash3":
+			slash_level = 3
+			# Add specific changes for slash3 here
+		"slash4":
+			slash_level = 4
+			# Add specific changes for slash4 here
+		"explosion1":
+			explosion_level = 1
+			# Add specific changes for explosion1 here
+		"explosion2":
+			explosion_level = 2
+			# Add specific changes for explosion2 here
+		"explosion3":
+			explosion_level = 3
+			# Add specific changes for explosion3 here
+		"explosion4":
+			explosion_level = 4
+			# Add specific changes for explosion4 here
 		"icespear1":
 			icespear_level = 1
 			icespear_baseammo += 1
@@ -558,6 +608,13 @@ func adjust_gui_collection(upgrade):
 	if upgrade_type != "item":  # Check if the upgrade is not a consumable item.
 		var new_item = itemContainer.instantiate()  # Create a new GUI element for the upgrade.
 		new_item.upgrade = upgrade  # Assign the upgrade data to the GUI element.
+		
+		# Set a display name or tooltip to the new GUI element
+		if new_item.has_method("set_text"):
+			new_item.set_text(upgrade_displayname)
+		elif new_item.has_node("Label"):  # Assuming there is a Label node in the itemContainer scene
+			new_item.get_node("Label").text = upgrade_displayname
+
 		match upgrade_type:
 			"weapon":
 				collectedWeapons.add_child(new_item)
@@ -592,3 +649,11 @@ func _on_btn_menu_click_end():
 	"""
 	get_tree().paused = false  # Unpause the game.
 	get_tree().change_scene_to_file("res://TitleScreen/menu.tscn")  # Change scene to the main menu.
+
+
+func _on_slash_attack_timer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_ice_spear_attack_timer_timeout() -> void:
+	pass # Replace with function body.
