@@ -148,11 +148,11 @@ func activate_slash():
 	Handles the activation of the slash skill. This method instantiates the slash effect,
 	positions it, and executes the slash attack if the spell is not currently on cooldown.
 	"""
-	var slash_instance = slash.instance()
-	add_child(slash_instance)
-	slash_instance.position = position  # Align the slash instance with the player's position.
-	slash_instance.target = get_global_mouse_position()
-	slash_instance.slash()  # Trigger the slashing mechanics.
+	var slashing = slash.instance()
+	add_child.call_deferred(slashing)
+	slashing.position = position  # Align the slash instance with the player's position.
+	slashing.target = get_global_mouse_position()
+	slashing.slash()  # Trigger the slashing mechanics.
 	slash_on_cd = true
 	slashTimer.start()
 
@@ -162,21 +162,23 @@ func activate_explosion():
 	Activates the explosion skill. This method creates an instance of the explosion effect,
 	sets its position, and triggers the explosion mechanics.
 	"""
-	var explosion_instance = explosion.instance()
-	add_child(explosion_instance)
-	explosion_instance.position = position  # Set the explosion at the player's location.
-	explosion_instance.create_forcefield_area()  # Initialize the forcefield of the explosion.
+	var explosioning = explosion.instance()
+	add_child.call_deferred(explosioning)
+	explosioning.position = position  # Set the explosion at the player's location.
+	explosioning.create_forcefield_area()  # Initialize the forcefield of the explosion.
+	explosion_on_cd = true
+	explosionTimer.start()
 
 func activate_dash():
 	"""
 	Activates the dash skill. This method instantiates the dash effect and executes the dash
 	by setting its initial conditions and starting the dash motion.
 	"""
-	var dash_instance = dash.instance()
-	add_child(dash_instance)
-	dash_instance.position = position  # Position the dash starting point at the player's current location.
-	dash_instance.target = get_global_mouse_position()
-	dash_instance.start_dash()  # Commence the dash movement.
+	var dashing = dash.instance()
+	add_child.call_deferred(dashing)
+	dashing.position = position  # Position the dash starting point at the player's current location.
+	dashing.target = get_global_mouse_position()
+	dashing.start_dash()  # Commence the dash movement.
 	dash_on_cd = true
 	dashTimer.start()
 
@@ -187,11 +189,11 @@ func fire_spell_1():
 	sets its position, target, and level, and then makes it a child of the current node.
 	The function also manages the cooldown of this ability.
 	"""
-	var icespear_attack = iceSpear.instance()
-	icespear_attack.position = position  # Set the ice spear's initial position to the character's current position.
-	icespear_attack.target = get_global_mouse_position()  # Set the target of the ice spear to the mouse position.
-	icespear_attack.level = icespear_level  # Assign the current level of the ice spear to the instantiated object.
-	add_child(icespear_attack)  # Add the ice spear to the scene.
+	var arrow = iceSpear.instance()
+	arrow.position = position  # Set the ice spear's initial position to the character's current position.
+	arrow.target = get_global_mouse_position()  # Set the target of the ice spear to the mouse position.
+	arrow.level = icespear_level  # Assign the current level of the ice spear to the instantiated object.
+	add_child.call_deferred(arrow)  # Add the ice spear to the scene.
 	spell_1_on_cd = true  # Set the cooldown flag to true.
 	iceSpearTimer.start()  # Start the cooldown timer.
 

@@ -9,7 +9,7 @@ length = 2.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("2:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -42,14 +42,11 @@ unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 
-[node name="2" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(473, 25)
 texture = ExtResource("2_5s1rc")
 hframes = 2
 vframes = 6
-frame = 11
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 
