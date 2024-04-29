@@ -1,4 +1,4 @@
-res://Player/player.tscn
+res://Player/Attack/ice_spear.tscn
 res://Enemy/enemy.gd
 res://Player/Attack/DASH.gd
 res://Player/Attack/ice_spear.gd
@@ -6,5 +6,3 @@ res://Player/Attack/javelin.gd
 res://Player/Attack/tornado.gd
 res://Utility/item_option.gd
 res://Utility/spawn_info.gd
-res://Player/Attack/DASH.tscn
-res://World/world.tscn
