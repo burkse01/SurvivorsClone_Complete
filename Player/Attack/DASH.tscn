@@ -1,19 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://qdihqxyiwswl"]
+[gd_scene load_steps=6 format=3 uid="uid://ds51s6yu6ury6"]
 
-[ext_resource type="Script" path="res://Player/Attack/DASH.gd" id="1_pm61r"]
-[ext_resource type="Texture2D" uid="uid://c6x43s8n8k12n" path="res://Textures/Items/Weapons/DASH3.png" id="2_nv0vi"]
+[ext_resource type="Script" path="res://Player/Attack/DASH.gd" id="1_38fuj"]
+[ext_resource type="Texture2D" uid="uid://c6x43s8n8k12n" path="res://Textures/Items/Weapons/DASH3.png" id="2_5s1rc"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hgdc1"]
-radius = 88.0
-height = 1172.0
-
-[sub_resource type="Animation" id="Animation_udrr0"]
+[sub_resource type="Animation" id="Animation_4jek6"]
 resource_name = "DASH"
-length = 2.4
+length = 2.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,36 +19,43 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pk625"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehjf3"]
 _data = {
-"DASH": SubResource("Animation_udrr0")
+"DASH": SubResource("Animation_4jek6")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hearn"]
+radius = 75.0
+height = 1038.0
+
 [node name="Dash" type="Node2D"]
-script = ExtResource("1_pm61r")
-
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-33, 5)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_hgdc1")
+script = ExtResource("1_38fuj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_pk625")
+"": SubResource("AnimationLibrary_ehjf3")
 }
 speed_scale = 2.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_nv0vi")
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="2" type="Sprite2D" parent="."]
+position = Vector2(473, 25)
+texture = ExtResource("2_5s1rc")
 hframes = 2
 vframes = 6
 frame = 11
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(467, 27)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hearn")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

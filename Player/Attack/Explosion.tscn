@@ -50,7 +50,6 @@ scale = Vector2(0.24025, 0.24025)
 texture = ExtResource("2_hjqd5")
 hframes = 4
 vframes = 4
-frame = 15
 
 [node name="Area2D" type="Area2D" parent="."]
 
