@@ -12,7 +12,7 @@ var dash_duration = 1.5  # The duration in seconds the dash lasts.
 var trail_effect = preload("res://Player/Attack/DASH.tscn")
 
 # Reference to the player node, assumes the player is part of a group named 'player'.
-@onready var player = get_tree().get_nodes_in_group("player")[0]
+@onready var player = get_tree().get_nodes_in_group("player")
 
 # Signal declaration to notify when the dash object should be removed from arrays managing game objects.
 signal remove_from_array(object)
@@ -86,4 +86,5 @@ func _on_tween_completed(_object, _key):
 
 
 func _on_timer_timeout() -> void:
-	pass # Replace with function body.
+	emit_signal("remove_from_array",self)
+	queue_free()

@@ -1,8 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfae4g65cgrp3"]
+[gd_scene load_steps=7 format=3 uid="uid://cuhifqgiaaboy"]
 
 [ext_resource type="Texture2D" uid="uid://1ssvsta63i3h" path="res://Textures/Enemy/explosion_pixelfied.png" id="1_xvhqw"]
-[ext_resource type="Script" path="res://Enemy/explosion.gd" id="2_d6gja"]
 [ext_resource type="AudioStream" uid="uid://bkehg6pw6gs2h" path="res://Audio/SoundEffect/enemy_death.ogg" id="2_wsm1y"]
+
+[sub_resource type="GDScript" id="GDScript_w7wqy"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$AnimationPlayer.play(\"explode\")
+
+
+func _on_animation_player_animation_finished(_anim_name):
+	queue_free()
+"
 
 [sub_resource type="Animation" id="Animation_064th"]
 length = 0.001
@@ -47,7 +59,7 @@ z_index = 1
 texture = ExtResource("1_xvhqw")
 hframes = 4
 vframes = 4
-script = ExtResource("2_d6gja")
+script = SubResource("GDScript_w7wqy")
 
 [node name="snd_explosion" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_wsm1y")

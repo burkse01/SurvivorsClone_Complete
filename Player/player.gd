@@ -30,7 +30,6 @@ var dash = preload("res://Player/Attack/DASH.tscn")  # Preloads the Dash attack 
 
 # Node references for attack timing
 @onready var iceSpearTimer = get_node("%IceSpearTimer")  # Timer node for managing Ice Spear cooldown.
-@onready var iceSpearAttackTimer = get_node("%IceSpearAttackTimer")  # Timer node for managing delays between Ice Spear attacks.
 @onready var tornadoTimer = get_node("%TornadoTimer")  # Timer node for managing Tornado cooldown.
 @onready var tornadoAttackTimer = get_node("%TornadoAttackTimer")  # Timer node for managing delays between Tornado attacks.
 @onready var javelinBase = get_node("%JavelinBase")  # Base node for Javelin management.
@@ -38,7 +37,6 @@ var dash = preload("res://Player/Attack/DASH.tscn")  # Preloads the Dash attack 
 # Assuming similar timer nodes exist for Slash, Explosion, and Dash in your scene:
 @onready var slashTimer = get_node("%SlashTimer")  # Timer node for managing Slash cooldown.
 # Optional: Attack timers for managing delays between these attacks (if applicable)
-@onready var slashAttackTimer = get_node("%SlashAttackTimer")  # Manage delays between Slash attacks.
 @onready var explosionTimer = get_node("%ExplosionTimer")  # Timer node for managing Explosion cooldown.
 @onready var dashTimer = get_node("%DashTimer")  # Timer node for managing Dash cooldown.
 
@@ -120,6 +118,18 @@ func _ready():
 	attack()  # Setup and execute initial attack configurations.
 	set_expbar(experience, calculate_experiencecap())  # Initialize the experience bar GUI.
 	_on_hurt_box_hurt(0, 0, 0)  # Simulate a hurt event to set up initial state.
+	
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_Q:
+				activate_slash()
+			KEY_W:
+				activate_explosion()
+			KEY_E:
+				activate_dash()
+			KEY_R:
+				fire_spell_1()
 
 func _physics_process(_delta):
 	"""
@@ -127,32 +137,16 @@ func _physics_process(_delta):
 	This method is called every frame and is used to manage character movement and active skill checks.
 	"""
 	movement()  # Handle character movement based on input and other conditions.
-	check_skill_activation()  # Check for and handle activation of character skills.
-
-func check_skill_activation():
-	"""
-	Checks if specific skills are activated through player input. This function is responsible for
-	responding to user actions that trigger skill uses.
-	"""
-	if Input.is_action_just_pressed("skill_slash"):
-		activate_slash()  # Activate the slash skill.
-	if Input.is_action_just_pressed("skill_explosion"):
-		activate_explosion()  # Activate the explosion skill.
-	if Input.is_action_just_pressed("skill_dash"):
-		activate_dash()  # Activate the dash skill.
-	if Input.is_action_just_pressed("spell_1"):
-		fire_spell_1()  # Activate the ice spear (arrow) skill.
 
 func activate_slash():
 	"""
 	Handles the activation of the slash skill. This method instantiates the slash effect,
 	positions it, and executes the slash attack if the spell is not currently on cooldown.
 	"""
-	var slashing = slash.instance()
+	var slashing = slash.instantiate()
 	add_child.call_deferred(slashing)
-	slashing.position = position  # Align the slash instance with the player's position.
-	slashing.target = get_global_mouse_position()
-	slashing.slash()  # Trigger the slashing mechanics.
+	slashing.global_position = global_position  # Align the slash instance with the player's position
+	slashing.execute_slash()  # Trigger the slashing mechanics.
 	slash_on_cd = true
 	slashTimer.start()
 
@@ -162,7 +156,7 @@ func activate_explosion():
 	Activates the explosion skill. This method creates an instance of the explosion effect,
 	sets its position, and triggers the explosion mechanics.
 	"""
-	var explosioning = explosion.instance()
+	var explosioning = explosion.instantiate()
 	add_child.call_deferred(explosioning)
 	explosioning.position = position  # Set the explosion at the player's location.
 	explosioning.create_forcefield_area()  # Initialize the forcefield of the explosion.
@@ -174,7 +168,7 @@ func activate_dash():
 	Activates the dash skill. This method instantiates the dash effect and executes the dash
 	by setting its initial conditions and starting the dash motion.
 	"""
-	var dashing = dash.instance()
+	var dashing = dash.instantiate()
 	add_child.call_deferred(dashing)
 	dashing.position = position  # Position the dash starting point at the player's current location.
 	dashing.target = get_global_mouse_position()
@@ -189,7 +183,7 @@ func fire_spell_1():
 	sets its position, target, and level, and then makes it a child of the current node.
 	The function also manages the cooldown of this ability.
 	"""
-	var arrow = iceSpear.instance()
+	var arrow = iceSpear.instantiate()
 	arrow.position = position  # Set the ice spear's initial position to the character's current position.
 	arrow.target = get_global_mouse_position()  # Set the target of the ice spear to the mouse position.
 	arrow.level = icespear_level  # Assign the current level of the ice spear to the instantiated object.
@@ -202,10 +196,10 @@ func movement():
 	Handles the character's movement based on player input. This function checks for movement inputs,
 	updates the character's position, and controls the animation based on the movement state.
 	"""
-	# Handle Ice Spear activation
+		# Handle Ice Spear activation
 	if Input.is_action_just_pressed("spell_1") and !spell_1_on_cd:
 		fire_spell_1()  # Trigger Ice Spear if its specific input is pressed and it is not on cooldown.
-
+		
 	# Handle Slash activation
 	if Input.is_action_just_pressed("skill_slash") and !slash_on_cd:
 		activate_slash()  # Trigger Slash if its specific input is pressed and it is not on cooldown.
@@ -217,10 +211,11 @@ func movement():
 	# Handle Dash activation
 	if Input.is_action_just_pressed("skill_dash") and !dash_on_cd:
 		activate_dash()  # Trigger Dash if its specific input is pressed and it is not on cooldown.
-
+	
 	if Input.is_action_just_pressed("right_click"):
 		stopped = false  # Set movement to active on right click.
 		destination = get_global_mouse_position()  # Update the destination to the mouse position.
+
 	if Input.is_action_just_pressed("stop"):
 		stopped = true  # Stop the character's movement if the stop input is pressed.
 
@@ -449,25 +444,20 @@ func levelup():
 	Handles the player's leveling up process. This function plays a sound, updates the level display,
 	animates the level panel, and provides new upgrade options to the player.
 	"""
-	sndLevelUp.play()  # Play the level-up sound effect.
-	lblLevel.text = "Level: " + str(experience_level)  # Update the level display with the new level.
-	
-	# Create a tween for the level panel animation.
-	var tween = Tween.new()
-	add_child(tween)  # Add the Tween node to the scene tree to make it active.
-	tween.interpolate_property(levelPanel, "position", levelPanel.position, Vector2(220, 50), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
-	tween.start()  # Start the tween animation.
-	levelPanel.visible = true  # Make the level panel visible.
-
-	# Initialize and populate the upgrade options.
+	sndLevelUp.play()
+	lblLevel.text = str("Level: ",experience_level)
+	var tween = levelPanel.create_tween()
+	tween.tween_property(levelPanel,"position",Vector2(220,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.play()
+	levelPanel.visible = true
 	var options = 0
 	var optionsmax = 3
 	while options < optionsmax:
-		var option_choice = itemOptions.instantiate()  # Instantiate new upgrade option items.
-		option_choice.item = get_random_item()  # Assign a random upgrade item to the option.
-		upgradeOptions.add_child(option_choice)  # Add the option to the upgrade options panel.
+		var option_choice = itemOptions.instantiate()
+		option_choice.item = get_random_item()
+		upgradeOptions.add_child(option_choice)
 		options += 1
-	get_tree().paused = true  # Pause the game tree, typically to allow the player to choose an upgrade without gameplay interruption.
+	get_tree().paused = true
 	
 func upgrade_character(upgrade):
 	match upgrade:
@@ -651,11 +641,3 @@ func _on_btn_menu_click_end():
 	"""
 	get_tree().paused = false  # Unpause the game.
 	get_tree().change_scene_to_file("res://TitleScreen/menu.tscn")  # Change scene to the main menu.
-
-
-func _on_slash_attack_timer_timeout() -> void:
-	pass # Replace with function body.
-
-
-func _on_ice_spear_attack_timer_timeout() -> void:
-	pass # Replace with function body.

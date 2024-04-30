@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://byp64guut45k8" path="res://Textures/Items/Weapons/TerranSword.png" id="2_1cjrf"]
 [ext_resource type="AudioStream" uid="uid://cl3g2vts3nyt0" path="res://Audio/SoundEffect/ice.wav" id="3_esswn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4tiy"]
-size = Vector2(14.182, 36.117)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v8ija"]
+height = 40.0
 
 [node name="IceSpear" type="Area2D" groups=["attack"]]
 top_level = true
@@ -22,7 +22,7 @@ texture = ExtResource("2_1cjrf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.19209e-07, 0)
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_p4tiy")
+shape = SubResource("CapsuleShape2D_v8ija")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

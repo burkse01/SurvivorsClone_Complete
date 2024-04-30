@@ -3,10 +3,12 @@
 [ext_resource type="Script" path="res://Player/Attack/Explosion.gd" id="1_ssc8o"]
 [ext_resource type="Texture2D" uid="uid://etrkpb3msi1n" path="res://Textures/Items/Weapons/EXPLOSION.png" id="2_hjqd5"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jt56f"]
+radius = 20.0
+
 [sub_resource type="Animation" id="Animation_30x4w"]
 resource_name = "EXPLOSION"
 length = 3.2
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -25,11 +27,12 @@ _data = {
 "EXPLOSION": SubResource("Animation_30x4w")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jt56f"]
-radius = 13.0
-
-[node name="Explosion" type="Node2D"]
+[node name="Explosion" type="Area2D"]
 script = ExtResource("1_ssc8o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["attack"]]
+position = Vector2(0, -12)
+shape = SubResource("CircleShape2D_jt56f")
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -46,10 +49,5 @@ scale = Vector2(0.24025, 0.24025)
 texture = ExtResource("2_hjqd5")
 hframes = 4
 vframes = 4
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["attack"]]
-shape = SubResource("CircleShape2D_jt56f")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

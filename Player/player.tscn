@@ -81,10 +81,6 @@ shape = SubResource("RectangleShape2D_yfi4i")
 unique_name_in_owner = true
 wait_time = 0.1
 
-[node name="IceSpearAttackTimer" type="Timer" parent="Attack/IceSpearTimer"]
-unique_name_in_owner = true
-wait_time = 0.075
-
 [node name="TornadoTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
 wait_time = 3.0
@@ -97,9 +93,6 @@ wait_time = 0.2
 unique_name_in_owner = true
 
 [node name="SlashTimer" type="Timer" parent="Attack"]
-unique_name_in_owner = true
-
-[node name="SlashAttackTimer" type="Timer" parent="Attack/SlashTimer"]
 unique_name_in_owner = true
 
 [node name="ExplosionTimer" type="Timer" parent="Attack"]
@@ -287,11 +280,9 @@ vframes = 3
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
-[connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/TornadoTimer" to="." method="_on_tornado_timer_timeout"]
 [connection signal="timeout" from="Attack/TornadoTimer/TornadoAttackTimer" to="." method="_on_tornado_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/SlashTimer" to="." method="_on_slash_timer_timeout"]
-[connection signal="timeout" from="Attack/SlashTimer/SlashAttackTimer" to="." method="_on_slash_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/ExplosionTimer" to="." method="_on_explosion_timer_timeout"]
 [connection signal="timeout" from="Attack/DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
