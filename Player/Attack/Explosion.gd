@@ -23,7 +23,7 @@ func _ready():
 	setup_explosion_properties()
 	create_forcefield_area()
 	add_child(cleanup_timer)
-	cleanup_timer.wait_time = 1.3  # Set the cleanup time to match the expansion duration.
+	cleanup_timer.wait_time = 1.6  # Set the cleanup time to match the expansion duration.
 	cleanup_timer.one_shot = true
 	cleanup_timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	cleanup_timer.start()  # Start the timer when the scene is ready.

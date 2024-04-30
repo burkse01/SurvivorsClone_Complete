@@ -22,3 +22,5 @@ res://Utility/enemy_spawner.tscn
 res://Utility/basic_button.tscn
 res://Enemy/explosion.tscn
 res://Enemy/enemy_cyclops.tscn
+res://Player/Attack/DASH.tscn
+res://Player/player.gd

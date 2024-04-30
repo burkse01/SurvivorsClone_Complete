@@ -1,7 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://bs40llkjurfht"]
 
-[ext_resource type="Script" path="res://Player/Attack/DASH.gd" id="1_c42vc"]
-[ext_resource type="Texture2D" uid="uid://c6x43s8n8k12n" path="res://Textures/Items/Weapons/DASH3.png" id="2_2rhwi"]
+[ext_resource type="Script" path="res://Player/Attack/DASH.gd" id="1_4t8h4"]
+[ext_resource type="Texture2D" uid="uid://c6x43s8n8k12n" path="res://Textures/Items/Weapons/DASH3.png" id="2_1g5yr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hearn"]
+radius = 75.0
+height = 1038.0
 
 [sub_resource type="Animation" id="Animation_4jek6"]
 resource_name = "DASH"
@@ -24,33 +28,30 @@ _data = {
 "DASH": SubResource("Animation_4jek6")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hearn"]
-radius = 75.0
-height = 1038.0
-
 [node name="Dash" type="Area2D"]
-script = ExtResource("1_c42vc")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ehjf3")
-}
-speed_scale = 2.0
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_4t8h4")
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(473, 25)
-texture = ExtResource("2_2rhwi")
-hframes = 2
-vframes = 6
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(467, 27)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_hearn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(473, 25)
+texture = ExtResource("2_1g5yr")
+hframes = 2
+vframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ehjf3")
+}
+speed_scale = 2.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

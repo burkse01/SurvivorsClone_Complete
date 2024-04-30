@@ -45,7 +45,7 @@ speed_scale = 2.0
 
 [node name="Explosion" type="Sprite2D" parent="."]
 position = Vector2(1.42109e-14, -22)
-scale = Vector2(0.24025, 0.24025)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_hjqd5")
 hframes = 4
 vframes = 4

@@ -171,7 +171,6 @@ func activate_dash():
 	var dashing = dash.instantiate()
 	add_child.call_deferred(dashing)
 	dashing.position = position  # Position the dash starting point at the player's current location.
-	dashing.target = get_global_mouse_position()
 	dashing.start_dash()  # Commence the dash movement.
 	dash_on_cd = true
 	dashTimer.start()
@@ -327,7 +326,7 @@ func _on_tornado_attack_timer_timeout():
 	if there is remaining ammo, configures it, and manages the sequence of tornado attacks.
 	"""
 	if tornado_ammo > 0:
-		var tornado_attack = tornado.instance()
+		var tornado_attack = tornado.instantiate()
 		tornado_attack.position = position  # Set the tornado's position to the player's current position.
 		tornado_attack.last_movement = last_movement  # Pass the last movement vector to the tornado for directional purposes.
 		tornado_attack.level = tornado_level  # Set the tornado's power level.

@@ -4,87 +4,80 @@ extends Area2D
 var level = 1
 var dash_speed = 700  # The speed at which the dash occurs.
 var dash_distance = 500  # The total distance covered by the dash.
-var damage = 20  # The amount of damage inflicted by the dash if it hits enemies.
-var knockback_amount = 400  # The force of knockback applied to enemies hit by the dash.
+var base_damage = 20  # Base damage inflicted by the dash.
+var base_knockback_amount = 400  # Base force of knockback applied by the dash.
 var dash_duration = 1.5  # The duration in seconds the dash lasts.
+var attack_size = 1.0
 
-# Preloads the trail effect resource to be used during the dash.
-var trail_effect = preload("res://Player/Attack/DASH.tscn")
+# Modifiers from player's stats or buffs
+var damage_modifier = 1.0
+var knockback_modifier = 1.0
 
-# Reference to the player node, assumes the player is part of a group named 'player'.
-@onready var player = get_tree().get_nodes_in_group("player")
+@onready var player = get_tree().get_first_node_in_group("player")
+@onready var animation_player = get_node("AnimationPlayer")
+@onready var cleanup_timer = Timer.new()  # Create a new Timer node for cleanup.
 
-# Signal declaration to notify when the dash object should be removed from arrays managing game objects.
 signal remove_from_array(object)
 
 func _ready():
-	"""
-	Initializes the dash effect as soon as the node enters the scene. This function automatically triggers
-	the start of the dash movement and effect creation.
-	"""
-	setup_dash_properties()  # Configure dash properties based on the current level.
+	setup_dash_properties()
 	start_dash()
-	
+	add_child(cleanup_timer)
+	cleanup_timer.wait_time = dash_duration
+	cleanup_timer.one_shot = true
+	cleanup_timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+	cleanup_timer.start()
+
 func setup_dash_properties():
-	"""
-	Configures dash properties based on its current level. Adjusts speed, distance, damage, and other relevant parameters.
-	"""
+	var damage = base_damage * damage_modifier
+	var knockback_amount = base_knockback_amount * knockback_modifier
 	match level:
 		1:
 			dash_speed = 700
 			dash_distance = 500
-			damage = 20
-			knockback_amount = 400
-			dash_duration = 1.5
 		2:
-			dash_speed = 700
-			dash_distance = 500
-			damage = 30
-			knockback_amount = 450
-			dash_duration = 1.5
+			dash_speed = 750
+			dash_distance = 550
+			damage *= 1.1
+			knockback_amount *= 1.1
 		3:
-			dash_speed = 700
-			dash_distance = 500
-			damage = 40
-			knockback_amount = 500
-			dash_duration = 1.5
+			dash_speed = 800
+			dash_distance = 600
+			damage *= 1.2
+			knockback_amount *= 1.2
 		4:
-			dash_speed = 700
-			dash_distance = 500
-			damage = 50
-			knockback_amount = 550
-			dash_duration = 1.5
+			dash_speed = 850
+			dash_distance = 650
+			damage *= 1.3
+			knockback_amount *= 1.3
 
 func start_dash():
-	"""
-	Handles the logic to start the dash movement using a Tween for smooth animation. This function calculates
-	the target position based on the dash distance and initializes the trail effect.
-	"""
-	# Calculate the dash target position based on the player's last movement direction.
-	var dash_target = global_position + player.last_movement.normalized() * dash_distance
-	# Create a new Tween node and configure it to animate the global position of this node.
-	var tween = Tween.new()
-	add_child(tween)
-	tween.interpolate_property(self, "global_position", global_position, dash_target, dash_duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	# Connect the 'tween_completed' signal to a method that handles the end of the dash.
-	tween.connect("tween_completed", Callable(self, "_on_tween_completed"))
-	tween.start()
-	
-	# Instantiate the trail effect and position it at the current position to follow the dash.
-	var trail_instance = trail_effect.instance()
-	trail_instance.global_position = global_position
-	add_child(trail_instance)
+	if animation_player:
+		animation_player.play("DASH")
 
-func _on_tween_completed(_object, _key):
-	"""
-	Called when the Tween animation completes. This method is responsible for checking collision with enemies,
-	applying damage and knockback, and then cleaning up the dash node.
-	"""
-	# Logic to check for collisions with enemies and apply damage and knockback could be implemented here.
-	emit_signal("remove_from_array", self)  # Notify interested parties that the dash is complete.
-	queue_free()  # Remove this node from the scene.
+func _on_timer_timeout():
+	apply_effects_at_end_position()
 
-
-func _on_timer_timeout() -> void:
-	emit_signal("remove_from_array",self)
+func apply_effects_at_end_position():
+	global_position += transform.x * dash_distance
+	check_collisions()
+	emit_signal("remove_from_array", self)
 	queue_free()
+
+func check_collisions():
+	var area = $CollisionShape2D as Area2D
+	if area:
+		for body in area.get_overlapping_bodies():
+			if body.is_in_group("enemies"):
+				var direction = (body.global_position - global_position).normalized()
+				body.call("_on_hurt_box_hurt", calculate_damage(), direction, calculate_knockback())
+
+func calculate_damage():
+	return base_damage * damage_modifier * (1 + player.spell_size)
+
+func calculate_knockback():
+	return base_knockback_amount * knockback_modifier * (1 + player.spell_size)
+
+func _process(delta):
+	if player:
+		global_position = player.global_position
