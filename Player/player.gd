@@ -145,8 +145,7 @@ func activate_slash():
 	"""
 	var slashing = slash.instantiate()
 	add_child.call_deferred(slashing)
-	slashing.global_position = global_position  # Align the slash instance with the player's position
-	slashing.execute_slash()  # Trigger the slashing mechanics.
+	slashing.position = position  # Align the slash instance with the player's position
 	slash_on_cd = true
 	slashTimer.start()
 
@@ -171,7 +170,6 @@ func activate_dash():
 	var dashing = dash.instantiate()
 	add_child.call_deferred(dashing)
 	dashing.position = position  # Position the dash starting point at the player's current location.
-	dashing.start_dash()  # Commence the dash movement.
 	dash_on_cd = true
 	dashTimer.start()
 

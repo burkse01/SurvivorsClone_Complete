@@ -2,11 +2,12 @@ extends Area2D
 
 # Constants and variables defining the properties of the slash attack.
 var level = 1
-var slash_range = 200.0  # The effective range of the slash in game units.
 var slash_damage = 50  # Damage dealt by each slash.
-var slash_speed = 400  # Speed at which the slash moves.
 var slash_knockback_amount = 100  # Amount of knockback force applied to enemies.
-var last_movement = Vector2.ZERO  # The last recorded movement direction of the character.
+var attack_size = 1.0
+
+var target = Vector2.ZERO
+var angle = Vector2.ZERO
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var cleanup_timer = Timer.new()
@@ -24,27 +25,25 @@ func _ready():
 
 func setup_slash_properties():
 	level = player.slash_level
+	angle = global_position.direction_to(target)
+	rotation = 0
 	match level:
 		1:
 			slash_damage = 50
-			slash_range = 200.0
-			slash_speed = 400
 			slash_knockback_amount = 100
+			attack_size = 1.0 * (1 + player.spell_size)
 		2:
 			slash_damage = 70
-			slash_range = 220.0
-			slash_speed = 450
 			slash_knockback_amount = 120
+			attack_size = 1.0 * (1 + player.spell_size)
 		3:
 			slash_damage = 90
-			slash_range = 240.0
-			slash_speed = 500
 			slash_knockback_amount = 140
+			attack_size = 1.0 * (1 + player.spell_size)
 		4:
 			slash_damage = 110
-			slash_range = 260.0
-			slash_speed = 550
 			slash_knockback_amount = 160
+			attack_size = 1.0 * (1 + player.spell_size)
 
 func execute_slash():
 	# Attempt to find and play the slash animation using the AnimationPlayer node.

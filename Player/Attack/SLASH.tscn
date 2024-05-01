@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://lqt1bdh2hwom"]
+[gd_scene load_steps=6 format=3 uid="uid://lqt1bdh2hwom"]
 
 [ext_resource type="Texture2D" uid="uid://cq3ignle7tpfu" path="res://Textures/Items/Weapons/SLASH1.png" id="1_kkbbt"]
 [ext_resource type="Script" path="res://Player/Attack/SLASH.gd" id="1_xm8pm"]
-[ext_resource type="Texture2D" uid="uid://c5hw283k2fsjh" path="res://Textures/Items/Weapons/SLASH2.png" id="2_ialmm"]
-[ext_resource type="Texture2D" uid="uid://c4smoyukolokd" path="res://Textures/Items/Weapons/SLASH3.png" id="3_axljx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wst8q"]
+radius = 138.004
 
 [sub_resource type="Animation" id="Animation_o5asm"]
 resource_name = "SLASH"
 length = 1.6
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Slash1:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -20,84 +21,37 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("Slash2:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 3, 2, 4, 5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Slash3:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2wujk"]
 _data = {
 "SLASH": SubResource("Animation_o5asm")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1q7c0"]
-radius = 52.0
-height = 320.0
-
 [node name="Slash" type="Area2D" groups=["attack"]]
 top_level = true
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 4
 script = ExtResource("1_xm8pm")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_wst8q")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_2wujk")
 }
 speed_scale = 2.0
 
 [node name="Slash1" type="Sprite2D" parent="."]
-position = Vector2(-30, 1)
+position = Vector2(44, -4)
 scale = Vector2(0.311343, 0.311343)
 texture = ExtResource("1_kkbbt")
 hframes = 3
 vframes = 3
-frame = 7
-
-[node name="Slash2" type="Sprite2D" parent="."]
-position = Vector2(4, 26)
-scale = Vector2(0.423611, 0.423611)
-texture = ExtResource("2_ialmm")
-hframes = 3
-vframes = 2
-frame = 5
-
-[node name="Slash3" type="Sprite2D" parent="."]
-position = Vector2(-57, 21)
-scale = Vector2(0.350116, 0.350116)
-texture = ExtResource("3_axljx")
-flip_h = true
-hframes = 3
-vframes = 2
 
 [node name="Timer" type="Timer" parent="." groups=["attack"]]
 unique_name_in_owner = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-70, 8)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_1q7c0")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

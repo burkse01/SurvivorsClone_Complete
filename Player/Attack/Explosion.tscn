@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://etrkpb3msi1n" path="res://Textures/Items/Weapons/EXPLOSION.png" id="2_hjqd5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jt56f"]
-radius = 20.0
+radius = 54.9181
 
 [sub_resource type="Animation" id="Animation_30x4w"]
 resource_name = "EXPLOSION"

@@ -1,84 +1,88 @@
 extends Area2D
 
-# This script handles the dashing mechanics of a player or an entity, including movement and effects.
+# Constants and variables defining the properties of the dash.
 var level = 1
-var dash_speed = 700  # The speed at which the dash occurs.
-var dash_distance = 500  # The total distance covered by the dash.
-var base_damage = 20  # Base damage inflicted by the dash.
-var base_knockback_amount = 400  # Base force of knockback applied by the dash.
-var dash_duration = 1.5  # The duration in seconds the dash lasts.
-var attack_size = 1.0
+var speed = 200  # Speed at which the dash occurs.
+var damage = 10  # Damage dealt by the dash.
+var knockback_amount = 300  # Knockback force applied by the dash.
+var max_distance = 200  # Maximum distance the dash can travel from the start position.
+var attack_size = 1.0  # Modifies the scale of the explosion based on player's spell size.
 
-# Modifiers from player's stats or buffs
-var damage_modifier = 1.0
-var knockback_modifier = 1.0
+var target = Vector2.ZERO
+var angle = Vector2.ZERO
+
+var start_position = Vector2.ZERO
+var moving = false  # Controls whether the dash is actively moving.
+var last_flip_state = false  # This tracks the last state of sprite flipping.
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var animation_player = get_node("AnimationPlayer")
-@onready var cleanup_timer = Timer.new()  # Create a new Timer node for cleanup.
-
+@onready var animation_player = get_node_or_null("AnimationPlayer")
+@onready var sprite = $Sprite2D  # Adjust the path to your sprite node if necessary
 signal remove_from_array(object)
 
 func _ready():
+	start_position = global_position
 	setup_dash_properties()
-	start_dash()
-	add_child(cleanup_timer)
-	cleanup_timer.wait_time = dash_duration
-	cleanup_timer.one_shot = true
-	cleanup_timer.connect("timeout", Callable(self, "_on_timer_timeout"))
-	cleanup_timer.start()
-
-func setup_dash_properties():
-	var damage = base_damage * damage_modifier
-	var knockback_amount = base_knockback_amount * knockback_modifier
-	level = player.dash_level
-	match level:
-		1:
-			dash_speed = 700
-			dash_distance = 500
-		2:
-			dash_speed = 750
-			dash_distance = 550
-			damage *= 1.1
-			knockback_amount *= 1.1
-		3:
-			dash_speed = 800
-			dash_distance = 600
-			damage *= 1.2
-			knockback_amount *= 1.2
-		4:
-			dash_speed = 850
-			dash_distance = 650
-			damage *= 1.3
-			knockback_amount *= 1.3
-
-func start_dash():
 	if animation_player:
 		animation_player.play("DASH")
+		moving = true  # Start moving when the animation starts.
 
-func _on_timer_timeout():
-	apply_effects_at_end_position()
+func setup_dash_properties():
+	level = player.dash_level
+	angle = global_position.direction_to(target)
+	rotation = 0
+	match level:
+		1:
+			speed = 200
+			damage = 10
+			knockback_amount = 300
+			attack_size = 1.0 * (1 + player.spell_size)
+		2:
+			speed = 300
+			damage = 15
+			knockback_amount = 400
+			attack_size = 1.0 * (1 + player.spell_size)
+		3:
+			speed = 400
+			damage = 20
+			knockback_amount = 500
+			attack_size = 1.0 * (1 + player.spell_size)
+		4:
+			speed = 500
+			damage = 25
+			knockback_amount = 600
+			attack_size = 1.0 * (1 + player.spell_size)
 
-func apply_effects_at_end_position():
-	global_position += transform.x * dash_distance
-	check_collisions()
-	emit_signal("remove_from_array", self)
-	queue_free()
-
-func check_collisions():
-	var area = $CollisionShape2D as Area2D
-	if area:
-		for body in area.get_overlapping_bodies():
-			if body.is_in_group("enemies"):
-				var direction = (body.global_position - global_position).normalized()
-				body.call("_on_hurt_box_hurt", calculate_damage(), direction, calculate_knockback())
-
-func calculate_damage():
-	return base_damage * damage_modifier * (1 + player.spell_size)
-
-func calculate_knockback():
-	return base_knockback_amount * knockback_modifier * (1 + player.spell_size)
+func clean_up_sprite():
+	sprite.visible = false  # Make the sprite invisible
+	queue_free()  # Enqueue this node for deletion at the end of the current frame
 
 func _process(delta):
-	if player:
-		global_position = player.global_position
+	if moving and start_position.distance_to(global_position) < max_distance:
+		var movement = (player.global_position - start_position).normalized() * speed * delta
+		global_position += movement
+		# Calculate the angle from the player to the mouse
+		var mouse_position = get_global_mouse_position()
+		var direction = (mouse_position - player.global_position).normalized()
+		var angle = atan2(direction.y, direction.x) * (180 / PI)
+		sprite.flip_h = angle > 90 or angle < -90  # Flip based on angle
+		if sprite.flip_h != last_flip_state:
+			sprite.position.x *= -1
+		last_flip_state = sprite.flip_h  # Update the last flip state
+
+	else:
+		moving = false  # Stop moving if maximum distance is reached or animation ends
+		clean_up_sprite()  # Call cleanup when movement is finished
+
+	# Optionally, stop moving when the animation finishes
+	if animation_player and not animation_player.is_playing():
+		moving = false
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "DASH":
+		moving = false  # Ensure the dash stops moving when the animation is over.
+		clean_up_sprite()  # Cleanup the sprite when animation finishes
+
+func _on_timer_timeout():
+	emit_signal("remove_from_array", self)
+	queue_free()
