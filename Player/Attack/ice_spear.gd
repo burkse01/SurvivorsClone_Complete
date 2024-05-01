@@ -16,6 +16,7 @@ signal remove_from_array(object)
 func _ready():
 	angle = global_position.direction_to(target)
 	rotation = angle.angle()
+	level = player.icespear_level
 	match level:
 		1:
 			hp = 1

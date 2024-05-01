@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" path="res://Player/Attack/javelin.gd" id="1_ro7n8"]
 [ext_resource type="AudioStream" uid="uid://ckro6v281rcab" path="res://Audio/SoundEffect/woosh.wav" id="3_6kycs"]
-[ext_resource type="Texture2D" uid="uid://etrkpb3msi1n" path="res://Textures/Items/Weapons/EXPLOSION.png" id="4_k6onv"]
+[ext_resource type="Texture2D" uid="uid://d1xtinovkw7yw" path="res://Textures/Items/Weapons/EAT.png" id="3_ui4t1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wnv3t"]
-radius = 17.9025
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8pc46"]
+radius = 20.0
+height = 166.667
 
 [sub_resource type="Animation" id="Animation_v0w65"]
 resource_name = "TOAD"
@@ -31,8 +32,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_30x4w"]
 resource_name = "EXPLOSION"
-length = 3.2
-loop_mode = 1
+length = 2.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -53,14 +53,15 @@ _data = {
 
 [node name="Javelin" type="Area2D" groups=["attack"]]
 top_level = true
+scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_ro7n8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -0.5)
-rotation = -0.785398
-shape = SubResource("CircleShape2D_wnv3t")
+position = Vector2(0, -20)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8pc46")
 disabled = true
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -95,9 +96,10 @@ speed_scale = 2.0
 [node name="Explosion" type="Sprite2D" parent="."]
 position = Vector2(1.42109e-14, -22)
 scale = Vector2(0.24025, 0.24025)
-texture = ExtResource("4_k6onv")
-hframes = 4
+texture = ExtResource("3_ui4t1")
+hframes = 3
 vframes = 4
+frame = 11
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

@@ -31,6 +31,7 @@ func _ready():
 func setup_dash_properties():
 	var damage = base_damage * damage_modifier
 	var knockback_amount = base_knockback_amount * knockback_modifier
+	level = player.dash_level
 	match level:
 		1:
 			dash_speed = 700

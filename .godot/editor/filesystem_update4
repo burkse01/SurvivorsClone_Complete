@@ -24,3 +24,5 @@ res://Enemy/explosion.tscn
 res://Enemy/enemy_cyclops.tscn
 res://Player/Attack/DASH.tscn
 res://Player/player.gd
+res://Textures/character_demo/info_and_license.txt
+res://Enemy/enemy_juggernaut.tscn

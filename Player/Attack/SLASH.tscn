@@ -51,11 +51,14 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1q7c0"]
-radius = 22.0
-height = 218.0
+radius = 52.0
+height = 320.0
 
-[node name="Slash" type="Area2D"]
-scale = Vector2(0.3, 0.3)
+[node name="Slash" type="Area2D" groups=["attack"]]
+top_level = true
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_xm8pm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -93,7 +96,7 @@ vframes = 2
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-71, 19)
+position = Vector2(-70, 8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1q7c0")
 
