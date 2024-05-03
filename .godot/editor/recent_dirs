@@ -1,3 +1,4 @@
+res://Enemy
 /Users/christian/Desktop/GitHub/SurvivorsClone_Complete/RealTimePlay
 res://Audio
 res://Textures/Items/Weapons
@@ -17,5 +18,4 @@ res://World
 res://Player/GUI
 res://Objects
 res://Player/Attack
-res://Enemy
 res://Player

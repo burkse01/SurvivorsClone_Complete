@@ -103,6 +103,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
 shape = SubResource("CircleShape2D_anwqc")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="GrabArea" type="Area2D" parent="."]
 collision_layer = 0
