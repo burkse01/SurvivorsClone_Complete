@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dncgepmkc4jf4"]
+[gd_scene load_steps=22 format=3 uid="uid://dncgepmkc4jf4"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_37q80"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="3_gs51i"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://cb4e8g30xxp5u" path="res://Font/tenderness.otf" id="6_okx7u"]
 [ext_resource type="AudioStream" uid="uid://ul8hunj8tl2t" path="res://Audio/SoundEffect/levelup.ogg" id="7_wl7d2"]
 [ext_resource type="Texture2D" uid="uid://cj6a5rhwov14" path="res://Textures/GUI/healthbar.png" id="8_flesq"]
+[ext_resource type="Texture2D" uid="uid://doxhsojn44ai6" path="res://Textures/ENVIRONMENT/summer_plains_v1.0_standard/Title2.png" id="9_a7o6e"]
 [ext_resource type="Texture2D" uid="uid://da53mspvqfxq4" path="res://Textures/GUI/health.png" id="9_uker1"]
 [ext_resource type="AudioStream" uid="uid://bnv76nm5171dn" path="res://Audio/SoundEffect/Victory.wav" id="10_rwm3p"]
 [ext_resource type="AudioStream" uid="uid://ca6physj6mqei" path="res://Audio/SoundEffect/Lose.ogg" id="11_28kfi"]
@@ -195,12 +196,19 @@ volume_db = -10.0
 [node name="DeathPanel" type="Panel" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 process_mode = 2
-visible = false
 layout_mode = 0
-offset_left = 230.0
-offset_top = -266.0
-offset_right = 430.0
-offset_bottom = -16.0
+offset_left = 801.0
+offset_top = -292.0
+offset_right = 1001.0
+offset_bottom = -42.0
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/DeathPanel"]
+layout_mode = 0
+offset_left = -140.0
+offset_top = -201.0
+offset_right = 623.0
+offset_bottom = 495.0
+texture = ExtResource("9_a7o6e")
 
 [node name="lbl_Result" type="Label" parent="GUILayer/GUI/DeathPanel"]
 unique_name_in_owner = true
@@ -208,7 +216,6 @@ layout_mode = 0
 offset_right = 200.0
 offset_bottom = 50.0
 theme_override_fonts/font = ExtResource("6_okx7u")
-text = "Result"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -224,11 +231,11 @@ volume_db = -10.0
 
 [node name="btn_menu" parent="GUILayer/GUI/DeathPanel" instance=ExtResource("12_i8esf")]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 200.0
-offset_right = 140.0
-offset_bottom = 230.0
-text = "Menu"
+offset_left = 63.0
+offset_top = 165.0
+offset_right = 143.0
+offset_bottom = 195.0
+text = ""
 
 [node name="lblTimer" type="Label" parent="GUILayer/GUI"]
 unique_name_in_owner = true
