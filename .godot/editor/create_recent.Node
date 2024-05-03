@@ -1,3 +1,4 @@
+TextureRect
 TileMap
 CollisionShape2D
 Area2D

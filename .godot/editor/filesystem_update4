@@ -1,4 +1,4 @@
-res://Player/player.tscn
+res://TitleScreen/menu.tscn
 res://Enemy/enemy.gd
 res://Player/Attack/DASH.gd
 res://Player/Attack/ice_spear.gd
@@ -6,6 +6,7 @@ res://Player/Attack/javelin.gd
 res://Player/Attack/tornado.gd
 res://Utility/item_option.gd
 res://Utility/spawn_info.gd
+res://Player/player.tscn
 res://World/world.tscn
 res://Player/Attack/SLASH.tscn
 res://Player/Attack/DASH.tscn
@@ -14,4 +15,3 @@ res://Enemy/explosion.tscn
 res://Enemy/enemy_super.tscn
 res://Enemy/enemy_kobold_weak.tscn
 res://Enemy/enemy_juggernaut.tscn
-res://TitleScreen/menu.tscn
