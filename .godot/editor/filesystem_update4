@@ -1,4 +1,4 @@
-res://Utility/enemy_spawner.tscn
+res://Enemy/enemy_kobold_weak.tscn
 res://Enemy/enemy.gd
 res://Player/Attack/DASH.gd
 res://Player/Attack/ice_spear.gd
@@ -6,9 +6,7 @@ res://Player/Attack/javelin.gd
 res://Player/Attack/tornado.gd
 res://Utility/item_option.gd
 res://Utility/spawn_info.gd
-res://Textures/character_demo/info_and_license.txt
 res://Utility/upgrade_db.tscn
-res://World/world.tscn
 res://Player/Attack/DASH.tscn
 res://TitleScreen/menu.tscn
 res://Enemy/enemy_cyclops.tscn
